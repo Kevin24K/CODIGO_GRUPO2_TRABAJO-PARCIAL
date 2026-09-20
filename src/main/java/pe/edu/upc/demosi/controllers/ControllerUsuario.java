@@ -1,58 +1,46 @@
 package pe.edu.upc.demosi.controllers;
 
-import jakarta.validation.Valid;
-import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pe.edu.upc.demosi.dtos.UsuarioDTCList;
-import pe.edu.upc.demosi.dtos.UsuarioDTCinsert;
-import pe.edu.upc.demosi.entities.Usuarios;
+import pe.edu.upc.demosi.entities.Usuario;
 import pe.edu.upc.demosi.servicesinterfaces.IUsuarioService;
-
-import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/Usuarios")
+@RequestMapping("/api/usuarios")
 public class ControllerUsuario {
-    private final IUsuarioService uS;
-    private final ModelMapper modelMapper;
 
-    public ControllerUsuario(IUsuarioService uS, ModelMapper modelMapper) {
+    private final IUsuarioService uS;
+
+    public ControllerUsuario(IUsuarioService uS) {
         this.uS = uS;
-        this.modelMapper = modelMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuarioDTCList>> listar() {
-
-        List<UsuarioDTCList> lista = uS.list()
-                .stream()
-                .map(usuarios -> modelMapper.map(usuarios, UsuarioDTCList.class))
-                .toList();
-
-        return ResponseEntity.ok(lista);
+    public ResponseEntity<List<Usuario>> listar() {
+        return ResponseEntity.ok(uS.list());
     }
+
+    @GetMapping("/activos")
+    public ResponseEntity<List<Usuario>> listarActivos() {
+        return ResponseEntity.ok(uS.listActivos());
+    }
+
+    @GetMapping("/activos-con-rol")
+    public ResponseEntity<List<Object[]>> listarActivosConRol() {
+        return ResponseEntity.ok(uS.listActivosConRol());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listarPorId(@PathVariable Long id) {
+        return uS.listById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
-    public ResponseEntity<UsuarioDTCinsert> registrar(
-            @Valid @RequestBody UsuarioDTCinsert dto) {
-
-        Usuarios usuarios = modelMapper.map(dto, Usuarios.class);
-
-        uS.insert(usuarios);
-
-        UsuarioDTCinsert responseDTO =
-                modelMapper.map(usuarios, UsuarioDTCinsert.class);
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(usuarios.getIdUsuario())
-                .toUri();
-
-        return ResponseEntity
-                .created(location)
-                .body(responseDTO);
+    public ResponseEntity<Usuario> registrar(@RequestBody Usuario usuario) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(uS.insert(usuario));
     }
 }
