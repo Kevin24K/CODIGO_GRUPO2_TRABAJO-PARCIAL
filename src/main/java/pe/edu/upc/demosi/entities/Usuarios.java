@@ -2,7 +2,6 @@ package pe.edu.upc.demosi.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,13 +29,13 @@ public class Usuarios {
     @Column(name = "FechaRegistroUsuario",nullable = false)
     private LocalDateTime FechaRegistroUsuario;
 
-    @Column(name = "activo", nullable = false)
-    private boolean activo;
+    @Column(name = "activoUsuarios", nullable = false)
+    private boolean activoUsuarios;
 
     public Usuarios() {
     }
 
-    public Usuarios(Long idUsuario, String idRol, String nameUsuario, String apellidoUsuario, String correoUsuario, String contraseñaHashUsuario, LocalDateTime fechaRegistroUsuario, boolean activo) {
+    public Usuarios(Long idUsuario, String idRol, String nameUsuario, String apellidoUsuario, String correoUsuario, String contraseñaHashUsuario, LocalDateTime fechaRegistroUsuario, boolean activoUsuarios) {
         this.idUsuario = idUsuario;
         this.idRol = idRol;
         this.nameUsuario = nameUsuario;
@@ -44,7 +43,7 @@ public class Usuarios {
         this.correoUsuario = correoUsuario;
         this.contraseñaHashUsuario = contraseñaHashUsuario;
         FechaRegistroUsuario = fechaRegistroUsuario;
-        this.activo = activo;
+        this.activoUsuarios = activoUsuarios;
     }
 
     public Long getIdUsuario() {
@@ -103,11 +102,11 @@ public class Usuarios {
         FechaRegistroUsuario = fechaRegistroUsuario;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public boolean isActivoUsuarios() {
+        return activoUsuarios;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setActivoUsuarios(boolean activoUsuarios) {
+        this.activoUsuarios = activoUsuarios;
     }
 }
