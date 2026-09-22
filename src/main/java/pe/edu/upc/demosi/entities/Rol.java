@@ -1,49 +1,25 @@
 package pe.edu.upc.demosi.entities;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Rol")
+@Table(name = "rol")
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRol;
 
-    @Column(name = "nombreRol", length = 100, nullable = false)
-    private String nombreRol;
+    @Column(name = "nombre", length = 30, nullable = false, unique = true)
+    private String nombre;
 
-    @Column(name = "descripcionRol", length = 255)
-    private String descripcionRol;
+    @Column(name = "descripcion", length = 150)
+    private String descripcion;
 
-    public Rol() {
-    }
-
-    public Rol(Long idRol, String nombreRol, String descripcionRol) {
-        this.idRol = idRol;
-        this.nombreRol = nombreRol;
-        this.descripcionRol = descripcionRol;
-    }
-
-    public Long getIdRol() {
-        return idRol;
-    }
-
-    public void setIdRol(Long idRol) {
-        this.idRol = idRol;
-    }
-
-    public String getNombreRol() {
-        return nombreRol;
-    }
-
-    public void setNombreRol(String nombreRol) {
-        this.nombreRol = nombreRol;
-    }
-
-    public String getDescripcionRol() {
-        return descripcionRol;
-    }
-
-    public void setDescripcionRol(String descripcionRol) {
-        this.descripcionRol = descripcionRol;
-    }
+    public Rol() {}
+    public Long getIdRol() { return idRol; }
+    public void setIdRol(Long idRol) { this.idRol = idRol; }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 }

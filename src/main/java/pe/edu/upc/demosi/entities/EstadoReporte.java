@@ -1,49 +1,25 @@
 package pe.edu.upc.demosi.entities;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Estado_Reporte")
+@Table(name = "estado_reporte")
 public class EstadoReporte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstadoReporte;
 
-    @Column(name = "nombreEReporte", length = 50, nullable = false)
-    private String nombreEReporte;
+    @Column(name = "nombre", length = 30, nullable = false, unique = true)
+    private String nombre;
 
-    @Column(name = "descripcionEReporte", length = 255)
-    private String descripcionEReporte;
+    @Column(name = "descripcion", length = 150)
+    private String descripcion;
 
-    public EstadoReporte() {
-    }
-
-    public EstadoReporte(Long idEstadoReporte, String nombreEReporte, String descripcionEReporte) {
-        this.idEstadoReporte = idEstadoReporte;
-        this.nombreEReporte = nombreEReporte;
-        this.descripcionEReporte = descripcionEReporte;
-    }
-
-    public Long getIdEstadoReporte() {
-        return idEstadoReporte;
-    }
-
-    public void setIdEstadoReporte(Long idEstadoReporte) {
-        this.idEstadoReporte = idEstadoReporte;
-    }
-
-    public String getNombreEReporte() {
-        return nombreEReporte;
-    }
-
-    public void setNombreEReporte(String nombreEReporte) {
-        this.nombreEReporte = nombreEReporte;
-    }
-
-    public String getDescripcionEReporte() {
-        return descripcionEReporte;
-    }
-
-    public void setDescripcionEReporte(String descripcionEReporte) {
-        this.descripcionEReporte = descripcionEReporte;
-    }
+    public EstadoReporte() {}
+    public Long getIdEstadoReporte() { return idEstadoReporte; }
+    public void setIdEstadoReporte(Long idEstadoReporte) { this.idEstadoReporte = idEstadoReporte; }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 }

@@ -1,37 +1,15 @@
 package pe.edu.upc.demosi.dtos;
 
 public class ErrorResponse {
-    private int status;
-    private String message;
-    private String path;
+    private String mensaje;
+    private int codigo;
 
-    public ErrorResponse(int status, String message, String path) {
-        this.status = status;
-        this.message = message;
-        this.path = path;
+    public ErrorResponse(String mensaje, int codigo) {
+        this.mensaje = mensaje;
+        this.codigo = codigo;
     }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
+    public String getMensaje() { return mensaje; }
+    public void setMensaje(String mensaje) { this.mensaje = mensaje; }
+    public int getCodigo() { return codigo; }
+    public void setCodigo(int codigo) { this.codigo = codigo; }
 }

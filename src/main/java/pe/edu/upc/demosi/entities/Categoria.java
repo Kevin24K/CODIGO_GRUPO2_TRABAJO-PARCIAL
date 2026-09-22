@@ -1,61 +1,30 @@
 package pe.edu.upc.demosi.entities;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Categoria")
+@Table(name = "categoria")
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategoria;
 
-    @Column(name = "nombreCategoria", length = 100, nullable = false)
-    private String nombreCategoria;
+    @Column(name = "nombre", length = 50, nullable = false, unique = true)
+    private String nombre;
 
-    @Column(name = "descripcionCategoria", length = 255)
-    private String descripcionCategoria;
+    @Column(name = "descripcion", length = 150)
+    private String descripcion;
 
-    @Column(name = "activoCategoria", nullable = false)
-    private boolean activoCategoria;
+    @Column(name = "activo", nullable = false)
+    private boolean activo;
 
-    public Categoria() {
-    }
-
-    public Categoria(Long idCategoria, String nombreCategoria, String descripcionCategoria, boolean activoCategoria) {
-        this.idCategoria = idCategoria;
-        this.nombreCategoria = nombreCategoria;
-        this.descripcionCategoria = descripcionCategoria;
-        this.activoCategoria = activoCategoria;
-    }
-
-    public Long getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Long idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
-    public String getNombreCategoria() {
-        return nombreCategoria;
-    }
-
-    public void setNombreCategoria(String nombreCategoria) {
-        this.nombreCategoria = nombreCategoria;
-    }
-
-    public String getDescripcionCategoria() {
-        return descripcionCategoria;
-    }
-
-    public void setDescripcionCategoria(String descripcionCategoria) {
-        this.descripcionCategoria = descripcionCategoria;
-    }
-
-    public boolean isActivoCategoria() {
-        return activoCategoria;
-    }
-
-    public void setActivoCategoria(boolean activoCategoria) {
-        this.activoCategoria = activoCategoria;
-    }
+    public Categoria() {}
+    public Long getIdCategoria() { return idCategoria; }
+    public void setIdCategoria(Long idCategoria) { this.idCategoria = idCategoria; }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public boolean isActivo() { return activo; }
+    public void setActivo(boolean activo) { this.activo = activo; }
 }

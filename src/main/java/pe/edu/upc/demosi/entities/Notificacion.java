@@ -1,110 +1,53 @@
 package pe.edu.upc.demosi.entities;
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Notificacion")
+@Table(name = "notificacion")
 public class Notificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idNotificacion;
 
-    @Column(name = "id_usuario", nullable = false)
-    private Long idUsuario;
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 
-    @Column(name = "id_coincidencia")
-    private Long idCoincidencia;
+    @ManyToOne
+    @JoinColumn(name = "id_coincidencia")
+    private Coincidencia coincidencia;
 
-    @Column(name = "tituloNotificacion", length = 100, nullable = false)
-    private String tituloNotificacion;
+    @Column(name = "titulo", length = 100, nullable = false)
+    private String titulo;
 
-    @Column(name = "mensajeNotificacion", length = 255, nullable = false)
-    private String mensajeNotificacion;
+    @Column(name = "mensaje", length = 255, nullable = false)
+    private String mensaje;
 
-    @Column(name = "tipoNotificacion", length = 50)
-    private String tipoNotificacion;
+    @Column(name = "tipo", length = 30, nullable = false)
+    private String tipo;
 
-    @Column(name = "leidaNotificacion", nullable = false)
-    private boolean leidaNotificacion;
+    @Column(name = "leida", nullable = false)
+    private boolean leida;
 
-    @Column(name = "fecha_creacion_Notificacion", nullable = false)
-    private LocalDateTime fechaCreacionNotificacion;
+    @Column(name = "fecha_creacion", nullable = false)
+    private LocalDateTime fechaCreacion;
 
-    public Notificacion() {
-    }
-
-    public Notificacion(Long idNotificacion, Long idUsuario, Long idCoincidencia, String tituloNotificacion, String mensajeNotificacion, String tipoNotificacion, boolean leidaNotificacion, LocalDateTime fechaCreacionNotificacion) {
-        this.idNotificacion = idNotificacion;
-        this.idUsuario = idUsuario;
-        this.idCoincidencia = idCoincidencia;
-        this.tituloNotificacion = tituloNotificacion;
-        this.mensajeNotificacion = mensajeNotificacion;
-        this.tipoNotificacion = tipoNotificacion;
-        this.leidaNotificacion = leidaNotificacion;
-        this.fechaCreacionNotificacion = fechaCreacionNotificacion;
-    }
-
-    public Long getIdNotificacion() {
-        return idNotificacion;
-    }
-
-    public void setIdNotificacion(Long idNotificacion) {
-        this.idNotificacion = idNotificacion;
-    }
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public Long getIdCoincidencia() {
-        return idCoincidencia;
-    }
-
-    public void setIdCoincidencia(Long idCoincidencia) {
-        this.idCoincidencia = idCoincidencia;
-    }
-
-    public String getTituloNotificacion() {
-        return tituloNotificacion;
-    }
-
-    public void setTituloNotificacion(String tituloNotificacion) {
-        this.tituloNotificacion = tituloNotificacion;
-    }
-
-    public String getMensajeNotificacion() {
-        return mensajeNotificacion;
-    }
-
-    public void setMensajeNotificacion(String mensajeNotificacion) {
-        this.mensajeNotificacion = mensajeNotificacion;
-    }
-
-    public String getTipoNotificacion() {
-        return tipoNotificacion;
-    }
-
-    public void setTipoNotificacion(String tipoNotificacion) {
-        this.tipoNotificacion = tipoNotificacion;
-    }
-
-    public boolean isLeidaNotificacion() {
-        return leidaNotificacion;
-    }
-
-    public void setLeidaNotificacion(boolean leidaNotificacion) {
-        this.leidaNotificacion = leidaNotificacion;
-    }
-
-    public LocalDateTime getFechaCreacionNotificacion() {
-        return fechaCreacionNotificacion;
-    }
-
-    public void setFechaCreacionNotificacion(LocalDateTime fechaCreacionNotificacion) {
-        this.fechaCreacionNotificacion = fechaCreacionNotificacion;
-    }
+    public Notificacion() {}
+    public Long getIdNotificacion() { return idNotificacion; }
+    public void setIdNotificacion(Long idNotificacion) { this.idNotificacion = idNotificacion; }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    public Coincidencia getCoincidencia() { return coincidencia; }
+    public void setCoincidencia(Coincidencia coincidencia) { this.coincidencia = coincidencia; }
+    public String getTitulo() { return titulo; }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
+    public String getMensaje() { return mensaje; }
+    public void setMensaje(String mensaje) { this.mensaje = mensaje; }
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
+    public boolean isLeida() { return leida; }
+    public void setLeida(boolean leida) { this.leida = leida; }
+    public LocalDateTime getFechaCreacion() { return fechaCreacion; }
+    public void setFechaCreacion(LocalDateTime fechaCreacion) { this.fechaCreacion = fechaCreacion; }
 }

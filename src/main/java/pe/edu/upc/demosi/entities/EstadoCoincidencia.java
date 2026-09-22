@@ -1,49 +1,25 @@
 package pe.edu.upc.demosi.entities;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "EstadoCoincidencia")
+@Table(name = "estado_coincidencia")
 public class EstadoCoincidencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstadoCoincidencia;
 
-    @Column(name = "nombreEstadoCoincidencia", length = 50, nullable = false)
-    private String nombreEstadoCoincidencia;
+    @Column(name = "nombre", length = 30, nullable = false, unique = true)
+    private String nombre;
 
-    @Column(name = "descripcionEstadoCoincidencia", length = 255)
-    private String descripcionEstadoCoincidencia;
+    @Column(name = "descripcion", length = 150)
+    private String descripcion;
 
-    public EstadoCoincidencia() {
-    }
-
-    public EstadoCoincidencia(Long idEstadoCoincidencia, String nombreEstadoCoincidencia, String descripcionEstadoCoincidencia) {
-        this.idEstadoCoincidencia = idEstadoCoincidencia;
-        this.nombreEstadoCoincidencia = nombreEstadoCoincidencia;
-        this.descripcionEstadoCoincidencia = descripcionEstadoCoincidencia;
-    }
-
-    public Long getIdEstadoCoincidencia() {
-        return idEstadoCoincidencia;
-    }
-
-    public void setIdEstadoCoincidencia(Long idEstadoCoincidencia) {
-        this.idEstadoCoincidencia = idEstadoCoincidencia;
-    }
-
-    public String getNombreEstadoCoincidencia() {
-        return nombreEstadoCoincidencia;
-    }
-
-    public void setNombreEstadoCoincidencia(String nombreEstadoCoincidencia) {
-        this.nombreEstadoCoincidencia = nombreEstadoCoincidencia;
-    }
-
-    public String getDescripcionEstadoCoincidencia() {
-        return descripcionEstadoCoincidencia;
-    }
-
-    public void setDescripcionEstadoCoincidencia(String descripcionEstadoCoincidencia) {
-        this.descripcionEstadoCoincidencia = descripcionEstadoCoincidencia;
-    }
+    public EstadoCoincidencia() {}
+    public Long getIdEstadoCoincidencia() { return idEstadoCoincidencia; }
+    public void setIdEstadoCoincidencia(Long idEstadoCoincidencia) { this.idEstadoCoincidencia = idEstadoCoincidencia; }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 }
