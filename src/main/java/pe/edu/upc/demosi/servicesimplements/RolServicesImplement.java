@@ -6,7 +6,6 @@ import pe.edu.upc.demosi.repositories.IRolRepository;
 import pe.edu.upc.demosi.servicesinterfaces.IRolService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RolServicesImplement implements IRolService {
@@ -27,8 +26,8 @@ public class RolServicesImplement implements IRolService {
     }
 
     @Override
-    public Optional<Rol> findById(long id) {
-        return rR.findById(id);
+    public Rol findById(long id) {
+        return rR.findById(id).orElse(null);
     }
 
     @Override

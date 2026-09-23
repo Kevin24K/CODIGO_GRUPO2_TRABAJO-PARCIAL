@@ -1,20 +1,14 @@
 package pe.edu.upc.demosi.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class UsuarioDTCList {
-
     private Long idUsuario;
-    private String Uname;
-    private String Uapellido;
-    private String Ucorreo;
-    private String UcontrasenaHash;
-    private LocalDateTime UfechaRegistro;
-    private boolean Uactivo;
+    private String nombreUsuario;
+    private String apellidoUsuario;
+    private String correoUsuario;
+    private LocalDate fechaRegistroUsuario;
+    private String rolNombre;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -24,51 +18,43 @@ public class UsuarioDTCList {
         this.idUsuario = idUsuario;
     }
 
-    public String getUname() {
-        return Uname;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setUname(String uname) {
-        Uname = uname;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public String getUapellido() {
-        return Uapellido;
+    public String getApellidoUsuario() {
+        return apellidoUsuario;
     }
 
-    public void setUapellido(String uapellido) {
-        Uapellido = uapellido;
+    public void setApellidoUsuario(String apellidoUsuario) {
+        this.apellidoUsuario = apellidoUsuario;
     }
 
-    public String getUcorreo() {
-        return Ucorreo;
+    public String getCorreoUsuario() {
+        return correoUsuario;
     }
 
-    public void setUcorreo(String ucorreo) {
-        Ucorreo = ucorreo;
+    public void setCorreoUsuario(String correoUsuario) {
+        this.correoUsuario = correoUsuario;
     }
 
-    public String getUcontrasenaHash() {
-        return UcontrasenaHash;
+    public LocalDate getFechaRegistroUsuario() {
+        return fechaRegistroUsuario;
     }
 
-    public void setUcontrasenaHash(String ucontrasenaHash) {
-        UcontrasenaHash = ucontrasenaHash;
+    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {
+        this.fechaRegistroUsuario = fechaRegistroUsuario;
     }
 
-    public LocalDateTime getUfechaRegistro() {
-        return UfechaRegistro;
+    public String getRolNombre() {
+        return rolNombre;
     }
 
-    public void setUfechaRegistro(LocalDateTime ufechaRegistro) {
-        UfechaRegistro = ufechaRegistro;
-    }
-
-    public boolean isUactivo() {
-        return Uactivo;
-    }
-
-    public void setUactivo(boolean uactivo) {
-        Uactivo = uactivo;
+    public void setRolNombre(String rolNombre) {
+        this.rolNombre = rolNombre;
     }
 }

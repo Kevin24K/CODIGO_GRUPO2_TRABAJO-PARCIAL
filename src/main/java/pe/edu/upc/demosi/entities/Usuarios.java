@@ -12,23 +12,23 @@ public class Usuarios {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
-    @Column(name = "Uname",length = 100,nullable = false)
-    private String Uname;
+    @Column(name = "nameUsuario",length = 100,nullable = false)
+    private String nameUsuario;
 
-    @Column(name = "Uapellido",length = 100,nullable = false)
-    private String Uapellido;
+    @Column(name = "apellidoUsuario",length = 100,nullable = false)
+    private String apellidoUsuario;
 
-    @Column(name = "Ucorreo",length = 100,nullable = false)
-    private String Ucorreo;
+    @Column(name = "correoUsuario",length = 100,nullable = false)
+    private String correoUsuario;
 
-    @Column(name = "UcontrasenaHash",length = 255,nullable = false)
-    private String UcontrasenaHash;
+    @Column(name = "contraseñaHashUsuario",length = 255,nullable = false)
+    private String contraseñaHashUsuario;
 
-    @Column(name = "UfechaRegistro",nullable = false)
-    private LocalDateTime UfechaRegistro;
+    @Column(name = "FechaRegistroUsuario",nullable = false)
+    private LocalDateTime FechaRegistroUsuario;
 
-    @Column(name = "Uactivo", nullable = false)
-    private boolean Uactivo;
+    @Column(name = "activoUsuarios", nullable = false)
+    private boolean activoUsuarios;
 
     @ManyToOne
     @JoinColumn(name = "id_rol", nullable = false)
@@ -40,14 +40,14 @@ public class Usuarios {
     public Usuarios() {
     }
 
-    public Usuarios(Long idUsuario, String uname, String uapellido, String ucorreo, String ucontrasenaHash, LocalDateTime ufechaRegistro, boolean uactivo, Rol rol, List<Notificacion> notificaciones) {
+    public Usuarios(Long idUsuario, String nameUsuario, String apellidoUsuario, String correoUsuario, String contraseñaHashUsuario, LocalDateTime fechaRegistroUsuario, boolean activoUsuarios, Rol rol, List<Notificacion> notificaciones) {
         this.idUsuario = idUsuario;
-        Uname = uname;
-        Uapellido = uapellido;
-        Ucorreo = ucorreo;
-        UcontrasenaHash = ucontrasenaHash;
-        UfechaRegistro = ufechaRegistro;
-        Uactivo = uactivo;
+        this.nameUsuario = nameUsuario;
+        this.apellidoUsuario = apellidoUsuario;
+        this.correoUsuario = correoUsuario;
+        this.contraseñaHashUsuario = contraseñaHashUsuario;
+        FechaRegistroUsuario = fechaRegistroUsuario;
+        this.activoUsuarios = activoUsuarios;
         this.rol = rol;
         this.notificaciones = notificaciones;
     }
@@ -60,52 +60,52 @@ public class Usuarios {
         this.idUsuario = idUsuario;
     }
 
-    public String getUname() {
-        return Uname;
+    public String getNameUsuario() {
+        return nameUsuario;
     }
 
-    public void setUname(String uname) {
-        Uname = uname;
+    public void setNameUsuario(String nameUsuario) {
+        this.nameUsuario = nameUsuario;
     }
 
-    public String getUapellido() {
-        return Uapellido;
+    public String getApellidoUsuario() {
+        return apellidoUsuario;
     }
 
-    public void setUapellido(String uapellido) {
-        Uapellido = uapellido;
+    public void setApellidoUsuario(String apellidoUsuario) {
+        this.apellidoUsuario = apellidoUsuario;
     }
 
-    public String getUcorreo() {
-        return Ucorreo;
+    public String getCorreoUsuario() {
+        return correoUsuario;
     }
 
-    public void setUcorreo(String ucorreo) {
-        Ucorreo = ucorreo;
+    public void setCorreoUsuario(String correoUsuario) {
+        this.correoUsuario = correoUsuario;
     }
 
-    public String getUcontrasenaHash() {
-        return UcontrasenaHash;
+    public String getContraseñaHashUsuario() {
+        return contraseñaHashUsuario;
     }
 
-    public void setUcontrasenaHash(String ucontrasenaHash) {
-        UcontrasenaHash = ucontrasenaHash;
+    public void setContraseñaHashUsuario(String contraseñaHashUsuario) {
+        this.contraseñaHashUsuario = contraseñaHashUsuario;
     }
 
-    public LocalDateTime getUfechaRegistro() {
-        return UfechaRegistro;
+    public LocalDateTime getFechaRegistroUsuario() {
+        return FechaRegistroUsuario;
     }
 
-    public void setUfechaRegistro(LocalDateTime ufechaRegistro) {
-        UfechaRegistro = ufechaRegistro;
+    public void setFechaRegistroUsuario(LocalDateTime fechaRegistroUsuario) {
+        FechaRegistroUsuario = fechaRegistroUsuario;
     }
 
-    public boolean isUactivo() {
-        return Uactivo;
+    public boolean isActivoUsuarios() {
+        return activoUsuarios;
     }
 
-    public void setUactivo(boolean uactivo) {
-        Uactivo = uactivo;
+    public void setActivoUsuarios(boolean activoUsuarios) {
+        this.activoUsuarios = activoUsuarios;
     }
 
     public Rol getRol() {

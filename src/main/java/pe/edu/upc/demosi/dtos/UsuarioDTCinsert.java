@@ -9,22 +9,27 @@ import java.time.LocalDateTime;
 public class UsuarioDTCinsert {
 
     private Long idUsuario;
-    @NotBlank(message = "El nombre del usuario no puede ser nulo ni estar vacío")
-    private String Uname;
-    @NotBlank(message = "El apellido del usuario no puede ser nulo ni estar vacío")
-    private String Uapellido;
-    @NotBlank(message = "El correo del usuario no puede ser nulo ni estar vacío")
-    private String Ucorreo;
-    @NotBlank(message = "La contraseña del usuario no puede ser nulo ni estar vacío")
-    private String UcontrasenaHash;
-    @NotNull(message = "El fecha de registro del usuario no puede ser nulo ni estar vacío")
-    private LocalDateTime UfechaRegistro;
-    @NotNull(message = "El estado del usuario no puede ser nulo ni estar vacío")
-    private boolean Uactivo;
-    private Long idRol;
 
-    public UsuarioDTCinsert() {
-    }
+    @NotBlank(message = "El nombre del usuario no puede ser nulo ni estar vacío")
+    private String nombreUsuario;
+
+    @NotBlank(message = "El apellido del usuario no puede ser nulo ni estar vacío")
+    private String apellidoUsuario;
+
+    @NotBlank(message = "El correo del usuario no puede ser nulo ni estar vacío")
+    private String correoUsuairo;
+
+    @NotBlank(message = "La contraseña del usuario no puede ser nulo ni estar vacío")
+    private String contrasenaHashUsuario;
+
+    @NotBlank(message = "El rol del usuario no puede ser nulo ni estar vacío")
+    private LocalDateTime fechaRegistroUsuario;
+
+    @NotBlank(message = "El estado del usuario es obligatorio")
+    private boolean activo;
+
+    @NotNull(message = "El Id del Rol es obligatorio.")
+    private Long idRol;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -34,52 +39,52 @@ public class UsuarioDTCinsert {
         this.idUsuario = idUsuario;
     }
 
-    public String getUname() {
-        return Uname;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setUname(String uname) {
-        Uname = uname;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public String getUapellido() {
-        return Uapellido;
+    public String getApellidoUsuario() {
+        return apellidoUsuario;
     }
 
-    public void setUapellido(String uapellido) {
-        Uapellido = uapellido;
+    public void setApellidoUsuario(String apellidoUsuario) {
+        this.apellidoUsuario = apellidoUsuario;
     }
 
-    public String getUcorreo() {
-        return Ucorreo;
+    public String getCorreoUsuairo() {
+        return correoUsuairo;
     }
 
-    public void setUcorreo(String ucorreo) {
-        Ucorreo = ucorreo;
+    public void setCorreoUsuairo(String correoUsuairo) {
+        this.correoUsuairo = correoUsuairo;
     }
 
-    public String getUcontrasenaHash() {
-        return UcontrasenaHash;
+    public String getContrasenaHashUsuario() {
+        return contrasenaHashUsuario;
     }
 
-    public void setUcontrasenaHash(String ucontrasenaHash) {
-        UcontrasenaHash = ucontrasenaHash;
+    public void setContrasenaHashUsuario(String contrasenaHashUsuario) {
+        this.contrasenaHashUsuario = contrasenaHashUsuario;
     }
 
-    public LocalDateTime getUfechaRegistro() {
-        return UfechaRegistro;
+    public LocalDateTime getFechaRegistroUsuario() {
+        return fechaRegistroUsuario;
     }
 
-    public void setUfechaRegistro(LocalDateTime ufechaRegistro) {
-        UfechaRegistro = ufechaRegistro;
+    public void setFechaRegistroUsuario(LocalDateTime fechaRegistroUsuario) {
+        this.fechaRegistroUsuario = fechaRegistroUsuario;
     }
 
-    public boolean isUactivo() {
-        return Uactivo;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setUactivo(boolean uactivo) {
-        Uactivo = uactivo;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     public Long getIdRol() {
