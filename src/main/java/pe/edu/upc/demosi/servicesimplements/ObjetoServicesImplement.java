@@ -33,4 +33,10 @@ public class ObjetoServicesImplement implements IObjetoService {
     public void delete(long id) {
         oR.deleteById(id);
     }
+
+    @Override
+    public List<Objeto> listarPorCategoria(long idCategoria) {
+        return oR.findByCategoria_IdCategoria(idCategoria);
+    }
+
 }

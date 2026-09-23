@@ -1,6 +1,8 @@
 package pe.edu.upc.demosi.entities;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Categoria")
 public class Categoria {
@@ -17,14 +19,18 @@ public class Categoria {
     @Column(name = "activoCategoria", nullable = false)
     private boolean activoCategoria;
 
+    @OneToMany(mappedBy = "categoria")
+    private List<Objeto> objetos;
+
     public Categoria() {
     }
 
-    public Categoria(Long idCategoria, String nombreCategoria, String descripcionCategoria, boolean activoCategoria) {
+    public Categoria(Long idCategoria, String nombreCategoria, String descripcionCategoria, boolean activoCategoria, List<Objeto> objetos) {
         this.idCategoria = idCategoria;
         this.nombreCategoria = nombreCategoria;
         this.descripcionCategoria = descripcionCategoria;
         this.activoCategoria = activoCategoria;
+        this.objetos = objetos;
     }
 
     public Long getIdCategoria() {
@@ -57,5 +63,13 @@ public class Categoria {
 
     public void setActivoCategoria(boolean activoCategoria) {
         this.activoCategoria = activoCategoria;
+    }
+
+    public List<Objeto> getObjetos() {
+        return objetos;
+    }
+
+    public void setObjetos(List<Objeto> objetos) {
+        this.objetos = objetos;
     }
 }

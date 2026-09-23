@@ -1,6 +1,8 @@
 package pe.edu.upc.demosi.entities;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "EstadoCoincidencia")
 public class EstadoCoincidencia {
@@ -14,13 +16,17 @@ public class EstadoCoincidencia {
     @Column(name = "descripcionEstadoCoincidencia", length = 255)
     private String descripcionEstadoCoincidencia;
 
+    @OneToMany(mappedBy = "estadoCoincidencia")
+    private List<Coincidencia> coincidencias;
+
     public EstadoCoincidencia() {
     }
 
-    public EstadoCoincidencia(Long idEstadoCoincidencia, String nombreEstadoCoincidencia, String descripcionEstadoCoincidencia) {
+    public EstadoCoincidencia(Long idEstadoCoincidencia, String nombreEstadoCoincidencia, String descripcionEstadoCoincidencia, List<Coincidencia> coincidencias) {
         this.idEstadoCoincidencia = idEstadoCoincidencia;
         this.nombreEstadoCoincidencia = nombreEstadoCoincidencia;
         this.descripcionEstadoCoincidencia = descripcionEstadoCoincidencia;
+        this.coincidencias = coincidencias;
     }
 
     public Long getIdEstadoCoincidencia() {
@@ -45,5 +51,13 @@ public class EstadoCoincidencia {
 
     public void setDescripcionEstadoCoincidencia(String descripcionEstadoCoincidencia) {
         this.descripcionEstadoCoincidencia = descripcionEstadoCoincidencia;
+    }
+
+    public List<Coincidencia> getCoincidencias() {
+        return coincidencias;
+    }
+
+    public void setCoincidencias(List<Coincidencia> coincidencias) {
+        this.coincidencias = coincidencias;
     }
 }

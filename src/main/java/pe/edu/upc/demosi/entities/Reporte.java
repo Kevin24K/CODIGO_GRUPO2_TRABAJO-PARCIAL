@@ -10,19 +10,10 @@ public class Reporte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReporte;
 
-    @Column(name = "id_usuario", nullable = false)
-    private Long idUsuario;
-
-    @Column(name = "id_objeto", nullable = false)
-    private Long idObjeto;
-
-    @Column(name = "id_estado_reporte", nullable = false)
-    private Long idEstadoReporte;
-
     @Column(name = "tipo_reporte", length = 50, nullable = false)
     private String tipoReporte;
 
-    @Column(name = "hora_evento_reporte", nullable = false)
+    @Column(name = "fechaEvento_reporte", nullable = false)
     private LocalDate fechaEvento_reporte;
 
     @Column(name = "hora_evento_reporte")
@@ -34,19 +25,31 @@ public class Reporte {
     @Column(name = "fecha_actualizacion_reporte")
     private LocalDateTime fecha_actualizacion_reporte;
 
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuarios usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "id_objeto", nullable = false)
+    private Objeto objeto;
+
+    @ManyToOne
+    @JoinColumn(name = "id_estado_reporte", nullable = false)
+    private EstadoReporte estadoReporte;
+
     public Reporte() {
     }
 
-    public Reporte(Long idReporte, Long idUsuario, Long idObjeto, Long idEstadoReporte, String tipoReporte, LocalDate fechaEvento, LocalTime hora_evento_reporte, LocalDateTime fecha_creacion_reporte, LocalDateTime fecha_actualizacion_reporte) {
+    public Reporte(Long idReporte, String tipoReporte, LocalDate fechaEvento_reporte, LocalTime hora_evento_reporte, LocalDateTime fecha_creacion_reporte, LocalDateTime fecha_actualizacion_reporte, Usuarios usuario, Objeto objeto, EstadoReporte estadoReporte) {
         this.idReporte = idReporte;
-        this.idUsuario = idUsuario;
-        this.idObjeto = idObjeto;
-        this.idEstadoReporte = idEstadoReporte;
         this.tipoReporte = tipoReporte;
-        this.fechaEvento_reporte = fechaEvento;
+        this.fechaEvento_reporte = fechaEvento_reporte;
         this.hora_evento_reporte = hora_evento_reporte;
         this.fecha_creacion_reporte = fecha_creacion_reporte;
         this.fecha_actualizacion_reporte = fecha_actualizacion_reporte;
+        this.usuario = usuario;
+        this.objeto = objeto;
+        this.estadoReporte = estadoReporte;
     }
 
     public Long getIdReporte() {
@@ -55,30 +58,6 @@ public class Reporte {
 
     public void setIdReporte(Long idReporte) {
         this.idReporte = idReporte;
-    }
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public Long getIdObjeto() {
-        return idObjeto;
-    }
-
-    public void setIdObjeto(Long idObjeto) {
-        this.idObjeto = idObjeto;
-    }
-
-    public Long getIdEstadoReporte() {
-        return idEstadoReporte;
-    }
-
-    public void setIdEstadoReporte(Long idEstadoReporte) {
-        this.idEstadoReporte = idEstadoReporte;
     }
 
     public String getTipoReporte() {
@@ -90,7 +69,7 @@ public class Reporte {
     }
 
     public LocalDate getFechaEvento_reporte() {
-            return fechaEvento_reporte;
+        return fechaEvento_reporte;
     }
 
     public void setFechaEvento_reporte(LocalDate fechaEvento_reporte) {
@@ -119,5 +98,29 @@ public class Reporte {
 
     public void setFecha_actualizacion_reporte(LocalDateTime fecha_actualizacion_reporte) {
         this.fecha_actualizacion_reporte = fecha_actualizacion_reporte;
+    }
+
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
+
+    public Objeto getObjeto() {
+        return objeto;
+    }
+
+    public void setObjeto(Objeto objeto) {
+        this.objeto = objeto;
+    }
+
+    public EstadoReporte getEstadoReporte() {
+        return estadoReporte;
+    }
+
+    public void setEstadoReporte(EstadoReporte estadoReporte) {
+        this.estadoReporte = estadoReporte;
     }
 }

@@ -9,4 +9,5 @@ public interface IObjetoService {
     List<Objeto> list();
     public Objeto findById(long id);
     void delete(long id);
+    List<Objeto> listarPorCategoria(long idCategoria);
 }

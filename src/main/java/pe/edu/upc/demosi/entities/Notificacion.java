@@ -9,12 +9,6 @@ public class Notificacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idNotificacion;
 
-    @Column(name = "id_usuario", nullable = false)
-    private Long idUsuario;
-
-    @Column(name = "id_coincidencia")
-    private Long idCoincidencia;
-
     @Column(name = "tituloNotificacion", length = 100, nullable = false)
     private String tituloNotificacion;
 
@@ -30,18 +24,26 @@ public class Notificacion {
     @Column(name = "fecha_creacion_Notificacion", nullable = false)
     private LocalDateTime fechaCreacionNotificacion;
 
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuarios usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "id_coincidencia") // Puede ser nullable si hay notificaciones genéricas del sistema
+    private Coincidencia coincidencia;
+
     public Notificacion() {
     }
 
-    public Notificacion(Long idNotificacion, Long idUsuario, Long idCoincidencia, String tituloNotificacion, String mensajeNotificacion, String tipoNotificacion, boolean leidaNotificacion, LocalDateTime fechaCreacionNotificacion) {
+    public Notificacion(Long idNotificacion, String tituloNotificacion, String mensajeNotificacion, String tipoNotificacion, boolean leidaNotificacion, LocalDateTime fechaCreacionNotificacion, Usuarios usuario, Coincidencia coincidencia) {
         this.idNotificacion = idNotificacion;
-        this.idUsuario = idUsuario;
-        this.idCoincidencia = idCoincidencia;
         this.tituloNotificacion = tituloNotificacion;
         this.mensajeNotificacion = mensajeNotificacion;
         this.tipoNotificacion = tipoNotificacion;
         this.leidaNotificacion = leidaNotificacion;
         this.fechaCreacionNotificacion = fechaCreacionNotificacion;
+        this.usuario = usuario;
+        this.coincidencia = coincidencia;
     }
 
     public Long getIdNotificacion() {
@@ -50,22 +52,6 @@ public class Notificacion {
 
     public void setIdNotificacion(Long idNotificacion) {
         this.idNotificacion = idNotificacion;
-    }
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public Long getIdCoincidencia() {
-        return idCoincidencia;
-    }
-
-    public void setIdCoincidencia(Long idCoincidencia) {
-        this.idCoincidencia = idCoincidencia;
     }
 
     public String getTituloNotificacion() {
@@ -106,5 +92,21 @@ public class Notificacion {
 
     public void setFechaCreacionNotificacion(LocalDateTime fechaCreacionNotificacion) {
         this.fechaCreacionNotificacion = fechaCreacionNotificacion;
+    }
+
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
+
+    public Coincidencia getCoincidencia() {
+        return coincidencia;
+    }
+
+    public void setCoincidencia(Coincidencia coincidencia) {
+        this.coincidencia = coincidencia;
     }
 }

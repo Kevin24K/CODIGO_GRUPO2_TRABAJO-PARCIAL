@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pe.edu.upc.demosi.dtos.UsuarioDTCList;
 import pe.edu.upc.demosi.dtos.UsuarioDTCinsert;
+import pe.edu.upc.demosi.entities.Rol;
 import pe.edu.upc.demosi.entities.Usuarios;
+import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
+import pe.edu.upc.demosi.servicesinterfaces.IRolService;
 import pe.edu.upc.demosi.servicesinterfaces.IUsuarioService;
 
 import java.net.URI;
@@ -17,10 +20,12 @@ import java.util.List;
 @RequestMapping("/api/Usuarios")
 public class ControllerUsuario {
     private final IUsuarioService uS;
+    private final IRolService rS;
     private final ModelMapper modelMapper;
 
-    public ControllerUsuario(IUsuarioService uS, ModelMapper modelMapper) {
+    public ControllerUsuario(IUsuarioService uS, IRolService rS, ModelMapper modelMapper) {
         this.uS = uS;
+        this.rS = rS;
         this.modelMapper = modelMapper;
     }
 
@@ -37,20 +42,23 @@ public class ControllerUsuario {
     @PostMapping
     public ResponseEntity<UsuarioDTCinsert> registrar(
             @Valid @RequestBody UsuarioDTCinsert dto) {
+        Rol rol = rS.findById(dto.getIdRol())
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "No existe el rol con el id: " + dto.getIdRol()
+                        ));
 
-        Usuarios usuarios = modelMapper.map(dto, Usuarios.class);
-
-        uS.insert(usuarios);
-
+        Usuarios act = modelMapper.map(dto, Usuarios.class);
+        act.setRol(rol);
+        uS.insert(act);
         UsuarioDTCinsert responseDTO =
-                modelMapper.map(usuarios, UsuarioDTCinsert.class);
+                modelMapper.map(act, UsuarioDTCinsert.class);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(usuarios.getIdUsuario())
+                .buildAndExpand(act.getIdUsuario())
                 .toUri();
-
         return ResponseEntity
                 .created(location)
                 .body(responseDTO);
