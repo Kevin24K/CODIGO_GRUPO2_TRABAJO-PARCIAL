@@ -8,4 +8,5 @@ public interface INotificacionService {
     List<Notificacion> list();
     public Notificacion findById(long id);
     void delete(long id);
+    List<Notificacion> listarPorUsuario(long idUsuario);
 }

@@ -34,4 +34,14 @@ public class ReporteServicesImplement implements IReporteService {
     public void delete(long id) {
         rR.deleteById(id);
     }
+
+    @Override
+    public List<Reporte> listarPorUsuario(long idUsuario) {
+        return rR.findByUsuario_IdUsuario(idUsuario);
+    }
+
+    @Override
+    public List<Reporte> listarPorEstado(long idEstadoReporte) {
+        return rR.findByEstadoReporte_IdEstadoReporte(idEstadoReporte);
+    }
 }

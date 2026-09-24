@@ -34,4 +34,9 @@ public class NotificacionServicesImplement implements INotificacionService {
     public void delete(long id) {
         nR.deleteById(id);
     }
+
+    @Override
+    public List<Notificacion> listarPorUsuario(long idUsuario) {
+        return nR.findByUsuario_IdUsuario(idUsuario);
+    }
 }

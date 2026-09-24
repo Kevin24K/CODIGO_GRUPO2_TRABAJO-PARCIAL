@@ -8,4 +8,6 @@ public interface IReporteService {
     List<Reporte> list();
     public Reporte findById(long id);
     void delete(long id);
+    List<Reporte> listarPorUsuario(long idUsuario);
+    List<Reporte> listarPorEstado(long idEstadoReporte);
 }

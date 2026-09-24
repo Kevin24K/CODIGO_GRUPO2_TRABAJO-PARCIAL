@@ -8,6 +8,7 @@ public class UsuarioDTCList {
     private String apellidoUsuario;
     private String correoUsuario;
     private LocalDate fechaRegistroUsuario;
+    private String rolNombre;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -47,5 +48,13 @@ public class UsuarioDTCList {
 
     public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {
         this.fechaRegistroUsuario = fechaRegistroUsuario;
+    }
+
+    public String getRolNombre() {
+        return rolNombre;
+    }
+
+    public void setRolNombre(String rolNombre) {
+        this.rolNombre = rolNombre;
     }
 }

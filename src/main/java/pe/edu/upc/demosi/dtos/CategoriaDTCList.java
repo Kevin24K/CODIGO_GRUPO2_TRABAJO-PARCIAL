@@ -1,19 +1,9 @@
 package pe.edu.upc.demosi.dtos;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
-public class CategoriaDTCinsert {
-
+public class CategoriaDTCList {
     private Long idCategoria;
-
-    @NotBlank(message = "El nombre de la categoría no puede ser nulo ni estar vacío")
     private String nombreCategoria;
-
-    @NotBlank(message = "El descripción de la categoría no puede ser nulo ni estar vacío")
     private String descripcionCategoria;
-
-    @NotNull(message = "El estado de la categoría es obligatorio")
     private boolean activoCategoria;
 
     public Long getIdCategoria() {

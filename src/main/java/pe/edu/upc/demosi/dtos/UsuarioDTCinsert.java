@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 
 public class UsuarioDTCinsert {
 
+    private Long idUsuario;
+
     @NotBlank(message = "El nombre del usuario no puede ser nulo ni estar vacío")
     private String nombreUsuario;
 
@@ -25,6 +27,17 @@ public class UsuarioDTCinsert {
 
     @NotBlank(message = "El estado del usuario es obligatorio")
     private boolean activo;
+
+    @NotNull(message = "El Id del Rol es obligatorio.")
+    private Long idRol;
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -72,5 +85,13 @@ public class UsuarioDTCinsert {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public Long getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(Long idRol) {
+        this.idRol = idRol;
     }
 }

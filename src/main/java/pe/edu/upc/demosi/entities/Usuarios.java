@@ -3,6 +3,7 @@ package pe.edu.upc.demosi.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Usuarios")
@@ -10,9 +11,6 @@ public class Usuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
-
-    @Column(name = "id_rol",nullable = false)
-    private String idRol;
 
     @Column(name = "nameUsuario",length = 100,nullable = false)
     private String nameUsuario;
@@ -32,18 +30,26 @@ public class Usuarios {
     @Column(name = "activoUsuarios", nullable = false)
     private boolean activoUsuarios;
 
+    @ManyToOne
+    @JoinColumn(name = "id_rol", nullable = false)
+    private Rol rol;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Notificacion> notificaciones;
+
     public Usuarios() {
     }
 
-    public Usuarios(Long idUsuario, String idRol, String nameUsuario, String apellidoUsuario, String correoUsuario, String contraseñaHashUsuario, LocalDateTime fechaRegistroUsuario, boolean activoUsuarios) {
+    public Usuarios(Long idUsuario, String nameUsuario, String apellidoUsuario, String correoUsuario, String contraseñaHashUsuario, LocalDateTime fechaRegistroUsuario, boolean activoUsuarios, Rol rol, List<Notificacion> notificaciones) {
         this.idUsuario = idUsuario;
-        this.idRol = idRol;
         this.nameUsuario = nameUsuario;
         this.apellidoUsuario = apellidoUsuario;
         this.correoUsuario = correoUsuario;
         this.contraseñaHashUsuario = contraseñaHashUsuario;
         FechaRegistroUsuario = fechaRegistroUsuario;
         this.activoUsuarios = activoUsuarios;
+        this.rol = rol;
+        this.notificaciones = notificaciones;
     }
 
     public Long getIdUsuario() {
@@ -52,14 +58,6 @@ public class Usuarios {
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public String getIdRol() {
-        return idRol;
-    }
-
-    public void setIdRol(String idRol) {
-        this.idRol = idRol;
     }
 
     public String getNameUsuario() {
@@ -108,5 +106,21 @@ public class Usuarios {
 
     public void setActivoUsuarios(boolean activoUsuarios) {
         this.activoUsuarios = activoUsuarios;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public List<Notificacion> getNotificaciones() {
+        return notificaciones;
+    }
+
+    public void setNotificaciones(List<Notificacion> notificaciones) {
+        this.notificaciones = notificaciones;
     }
 }

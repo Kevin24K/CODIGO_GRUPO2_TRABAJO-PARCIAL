@@ -1,15 +1,14 @@
 package pe.edu.upc.demosi.entities;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Objeto")
 public class Objeto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idObjeto;
-
-    @Column(name = "id_categoria", nullable = false)
-    private Long idCategoria;
 
     @Column(name = "nombreObjeto", length = 100, nullable = false)
     private String nombreObjeto;
@@ -26,17 +25,22 @@ public class Objeto {
     @Column(name = "activoObjeto", nullable = false)
     private boolean activoObjeto;
 
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", nullable = false)
+    private Categoria categoria;
+
     public Objeto() {
     }
 
-    public Objeto(Long idObjeto, Long idCategoria, String nombreObjeto, String descripcionObjeto, String colorObjeto, String marcaObjeto, boolean activoObjeto) {
+    public Objeto(Long idObjeto, String nombreObjeto, String descripcionObjeto, String colorObjeto, String marcaObjeto, boolean activoObjeto, Categoria categoria) {
         this.idObjeto = idObjeto;
-        this.idCategoria = idCategoria;
+
         this.nombreObjeto = nombreObjeto;
         this.descripcionObjeto = descripcionObjeto;
         this.colorObjeto = colorObjeto;
         this.marcaObjeto = marcaObjeto;
         this.activoObjeto = activoObjeto;
+        this.categoria = categoria;
     }
 
     public Long getIdObjeto() {
@@ -45,14 +49,6 @@ public class Objeto {
 
     public void setIdObjeto(Long idObjeto) {
         this.idObjeto = idObjeto;
-    }
-
-    public Long getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Long idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     public String getNombreObjeto() {
@@ -93,5 +89,13 @@ public class Objeto {
 
     public void setActivoObjeto(boolean activoObjeto) {
         this.activoObjeto = activoObjeto;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
