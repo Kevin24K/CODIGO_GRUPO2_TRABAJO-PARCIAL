@@ -1,7 +1,6 @@
 package pe.edu.upc.demosi.entities;
 import jakarta.persistence.*;
 
-import java.util.List;
 
 @Entity
 @Table(name = "Estado_Reporte")

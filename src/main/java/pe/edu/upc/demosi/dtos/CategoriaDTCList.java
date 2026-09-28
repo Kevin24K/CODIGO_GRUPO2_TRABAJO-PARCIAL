@@ -1,10 +1,5 @@
 package pe.edu.upc.demosi.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 public class CategoriaDTCList {
     private Long idCategoria;
     private String nombreCategoria;

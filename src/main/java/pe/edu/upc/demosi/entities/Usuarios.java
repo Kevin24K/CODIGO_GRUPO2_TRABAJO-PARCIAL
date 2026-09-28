@@ -3,7 +3,6 @@ package pe.edu.upc.demosi.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "Usuarios")

@@ -1,7 +1,6 @@
 package pe.edu.upc.demosi.servicesimplements;
 
 import org.springframework.stereotype.Service;
-import pe.edu.upc.demosi.entities.Rol;
 import pe.edu.upc.demosi.entities.Usuarios;
 import pe.edu.upc.demosi.servicesinterfaces.IUsuarioService;
 import pe.edu.upc.demosi.repositories.IUsuarioRepository;

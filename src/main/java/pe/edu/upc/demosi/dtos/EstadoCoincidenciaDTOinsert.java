@@ -2,8 +2,6 @@ package pe.edu.upc.demosi.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 
-import java.time.LocalDateTime;
-
 public class EstadoCoincidenciaDTOinsert {
 
     private Long idEstadoCoincidencia;

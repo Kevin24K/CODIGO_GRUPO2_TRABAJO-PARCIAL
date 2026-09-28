@@ -1,9 +1,5 @@
 package pe.edu.upc.demosi.dtos;
 
-
-
-import jakarta.validation.constraints.NotNull;
-
 import java.time.LocalDateTime;
 
 public class NotificacionDTCList {

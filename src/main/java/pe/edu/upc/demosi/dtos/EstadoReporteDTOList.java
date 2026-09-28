@@ -1,7 +1,5 @@
 package pe.edu.upc.demosi.dtos;
 
-import jakarta.validation.constraints.NotBlank;
-
 public class EstadoReporteDTOList {
 
     private Long idEstadoReporte;

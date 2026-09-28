@@ -1,13 +1,5 @@
 package pe.edu.upc.demosi.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
-
-import java.time.LocalDateTime;
-
 public class EstadoCoincidenciaDTOList {
 
     private Long idEstadoCoincidencia;
