@@ -9,14 +9,14 @@ public class Coincidencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCoincidencia;
 
-    @Column(name = "porcentaje_similitud_Coincidencia")
-    private Double porcentajeSimilitudCoincidencia;
+    @Column(name = "porcentaje_similitud_coincidencia")
+    private Double porcentajeSimilitudC;
 
-    @Column(name = "detalle_coincidencia", columnDefinition = "TEXT")
-    private String detalleCoincidencia;
+    @Column(name = "detalle_coin|cidencia", columnDefinition = "TEXT")
+    private String detalleC;
 
-    @Column(name = "fecha_generacion_Coincidencia", nullable = false)
-    private LocalDateTime fechaGeneracionCoincidencia;
+    @Column(name = "fecha_generacion_coincidencia", nullable = false)
+    private LocalDateTime fechaGeneracionC;
 
     @ManyToOne
     @JoinColumn(name = "id_reporte_perdido", nullable = false)
@@ -35,11 +35,11 @@ public class Coincidencia {
     public Coincidencia() {
     }
 
-    public Coincidencia(Long idCoincidencia, Double porcentajeSimilitudCoincidencia, String detalleCoincidencia, LocalDateTime fechaGeneracionCoincidencia, Reporte reportePerdido, Reporte reporteEncontrado, EstadoCoincidencia estadoCoincidencia) {
+    public Coincidencia(Long idCoincidencia, Double porcentajeSimilitudC, String detalleC, LocalDateTime fechaGeneracionC, Reporte reportePerdido, Reporte reporteEncontrado, EstadoCoincidencia estadoCoincidencia) {
         this.idCoincidencia = idCoincidencia;
-        this.porcentajeSimilitudCoincidencia = porcentajeSimilitudCoincidencia;
-        this.detalleCoincidencia = detalleCoincidencia;
-        this.fechaGeneracionCoincidencia = fechaGeneracionCoincidencia;
+        this.porcentajeSimilitudC = porcentajeSimilitudC;
+        this.detalleC = detalleC;
+        this.fechaGeneracionC = fechaGeneracionC;
         this.reportePerdido = reportePerdido;
         this.reporteEncontrado = reporteEncontrado;
         this.estadoCoincidencia = estadoCoincidencia;
@@ -53,28 +53,28 @@ public class Coincidencia {
         this.idCoincidencia = idCoincidencia;
     }
 
-    public Double getPorcentajeSimilitudCoincidencia() {
-        return porcentajeSimilitudCoincidencia;
+    public Double getPorcentajeSimilitudC() {
+        return porcentajeSimilitudC;
     }
 
-    public void setPorcentajeSimilitudCoincidencia(Double porcentajeSimilitudCoincidencia) {
-        this.porcentajeSimilitudCoincidencia = porcentajeSimilitudCoincidencia;
+    public void setPorcentajeSimilitudC(Double porcentajeSimilitudC) {
+        this.porcentajeSimilitudC = porcentajeSimilitudC;
     }
 
-    public String getDetalleCoincidencia() {
-        return detalleCoincidencia;
+    public String getDetalleC() {
+        return detalleC;
     }
 
-    public void setDetalleCoincidencia(String detalleCoincidencia) {
-        this.detalleCoincidencia = detalleCoincidencia;
+    public void setDetalleC(String detalleC) {
+        this.detalleC = detalleC;
     }
 
-    public LocalDateTime getFechaGeneracionCoincidencia() {
-        return fechaGeneracionCoincidencia;
+    public LocalDateTime getFechaGeneracionC() {
+        return fechaGeneracionC;
     }
 
-    public void setFechaGeneracionCoincidencia(LocalDateTime fechaGeneracionCoincidencia) {
-        this.fechaGeneracionCoincidencia = fechaGeneracionCoincidencia;
+    public void setFechaGeneracionC(LocalDateTime fechaGeneracionC) {
+        this.fechaGeneracionC = fechaGeneracionC;
     }
 
     public Reporte getReportePerdido() {

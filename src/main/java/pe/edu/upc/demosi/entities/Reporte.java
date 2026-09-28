@@ -3,6 +3,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Entity
 @Table(name = "Reporte")
 public class Reporte {
@@ -13,17 +15,17 @@ public class Reporte {
     @Column(name = "tipo_reporte", length = 50, nullable = false)
     private String tipoReporte;
 
-    @Column(name = "fechaEvento_reporte", nullable = false)
-    private LocalDate fechaEvento_reporte;
+    @Column(name = "fecha_evento_reporte", nullable = false)
+    private LocalDate fechaeventoR;
 
     @Column(name = "hora_evento_reporte")
-    private LocalTime hora_evento_reporte;
+    private LocalTime horaEventoR;
 
     @Column(name = "fecha_creacion_reporte", nullable = false)
-    private LocalDateTime fecha_creacion_reporte;
+    private LocalDateTime fechaCreacion;
 
     @Column(name = "fecha_actualizacion_reporte")
-    private LocalDateTime fecha_actualizacion_reporte;
+    private LocalDateTime fechaActualizacionR;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
@@ -37,19 +39,28 @@ public class Reporte {
     @JoinColumn(name = "id_estado_reporte", nullable = false)
     private EstadoReporte estadoReporte;
 
+    @OneToMany(mappedBy = "reportePerdido")
+    private List<Coincidencia> coincidenciasComoPerdido;
+
+    // 2. Lista de coincidencias donde este reporte es el objeto ENCONTRADO
+    @OneToMany(mappedBy = "reporteEncontrado")
+    private List<Coincidencia> coincidenciasComoEncontrado;
+
     public Reporte() {
     }
 
-    public Reporte(Long idReporte, String tipoReporte, LocalDate fechaEvento_reporte, LocalTime hora_evento_reporte, LocalDateTime fecha_creacion_reporte, LocalDateTime fecha_actualizacion_reporte, Usuarios usuario, Objeto objeto, EstadoReporte estadoReporte) {
+    public Reporte(Long idReporte, String tipoReporte, LocalDate fechaeventoR, LocalTime horaEventoR, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacionR, Usuarios usuario, Objeto objeto, EstadoReporte estadoReporte, List<Coincidencia> coincidenciasComoPerdido, List<Coincidencia> coincidenciasComoEncontrado) {
         this.idReporte = idReporte;
         this.tipoReporte = tipoReporte;
-        this.fechaEvento_reporte = fechaEvento_reporte;
-        this.hora_evento_reporte = hora_evento_reporte;
-        this.fecha_creacion_reporte = fecha_creacion_reporte;
-        this.fecha_actualizacion_reporte = fecha_actualizacion_reporte;
+        this.fechaeventoR = fechaeventoR;
+        this.horaEventoR = horaEventoR;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaActualizacionR = fechaActualizacionR;
         this.usuario = usuario;
         this.objeto = objeto;
         this.estadoReporte = estadoReporte;
+        this.coincidenciasComoPerdido = coincidenciasComoPerdido;
+        this.coincidenciasComoEncontrado = coincidenciasComoEncontrado;
     }
 
     public Long getIdReporte() {
@@ -68,36 +79,36 @@ public class Reporte {
         this.tipoReporte = tipoReporte;
     }
 
-    public LocalDate getFechaEvento_reporte() {
-        return fechaEvento_reporte;
+    public LocalDate getFechaeventoR() {
+        return fechaeventoR;
     }
 
-    public void setFechaEvento_reporte(LocalDate fechaEvento_reporte) {
-        this.fechaEvento_reporte = fechaEvento_reporte;
+    public void setFechaeventoR(LocalDate fechaeventoR) {
+        this.fechaeventoR = fechaeventoR;
     }
 
-    public LocalTime getHora_evento_reporte() {
-        return hora_evento_reporte;
+    public LocalTime getHoraEventoR() {
+        return horaEventoR;
     }
 
-    public void setHora_evento_reporte(LocalTime hora_evento_reporte) {
-        this.hora_evento_reporte = hora_evento_reporte;
+    public void setHoraEventoR(LocalTime horaEventoR) {
+        this.horaEventoR = horaEventoR;
     }
 
-    public LocalDateTime getFecha_creacion_reporte() {
-        return fecha_creacion_reporte;
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setFecha_creacion_reporte(LocalDateTime fecha_creacion_reporte) {
-        this.fecha_creacion_reporte = fecha_creacion_reporte;
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
-    public LocalDateTime getFecha_actualizacion_reporte() {
-        return fecha_actualizacion_reporte;
+    public LocalDateTime getFechaActualizacionR() {
+        return fechaActualizacionR;
     }
 
-    public void setFecha_actualizacion_reporte(LocalDateTime fecha_actualizacion_reporte) {
-        this.fecha_actualizacion_reporte = fecha_actualizacion_reporte;
+    public void setFechaActualizacionR(LocalDateTime fechaActualizacionR) {
+        this.fechaActualizacionR = fechaActualizacionR;
     }
 
     public Usuarios getUsuario() {
@@ -122,5 +133,21 @@ public class Reporte {
 
     public void setEstadoReporte(EstadoReporte estadoReporte) {
         this.estadoReporte = estadoReporte;
+    }
+
+    public List<Coincidencia> getCoincidenciasComoPerdido() {
+        return coincidenciasComoPerdido;
+    }
+
+    public void setCoincidenciasComoPerdido(List<Coincidencia> coincidenciasComoPerdido) {
+        this.coincidenciasComoPerdido = coincidenciasComoPerdido;
+    }
+
+    public List<Coincidencia> getCoincidenciasComoEncontrado() {
+        return coincidenciasComoEncontrado;
+    }
+
+    public void setCoincidenciasComoEncontrado(List<Coincidencia> coincidenciasComoEncontrado) {
+        this.coincidenciasComoEncontrado = coincidenciasComoEncontrado;
     }
 }

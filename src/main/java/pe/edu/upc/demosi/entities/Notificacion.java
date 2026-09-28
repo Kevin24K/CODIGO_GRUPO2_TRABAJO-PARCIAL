@@ -19,10 +19,10 @@ public class Notificacion {
     private String tipoNotificacion;
 
     @Column(name = "leidaNotificacion", nullable = false)
-    private boolean leidaNotificacion;
+    private Boolean leidaNotificacion;
 
-    @Column(name = "fecha_creacion_Notificacion", nullable = false)
-    private LocalDateTime fechaCreacionNotificacion;
+    @Column(name = "fecha_creacion_notificacion", nullable = false)
+    private LocalDateTime fechaCreacionN;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
@@ -35,13 +35,13 @@ public class Notificacion {
     public Notificacion() {
     }
 
-    public Notificacion(Long idNotificacion, String tituloNotificacion, String mensajeNotificacion, String tipoNotificacion, boolean leidaNotificacion, LocalDateTime fechaCreacionNotificacion, Usuarios usuario, Coincidencia coincidencia) {
+    public Notificacion(Long idNotificacion, String tituloNotificacion, String mensajeNotificacion, String tipoNotificacion, Boolean leidaNotificacion, LocalDateTime fechaCreacionN, Usuarios usuario, Coincidencia coincidencia) {
         this.idNotificacion = idNotificacion;
         this.tituloNotificacion = tituloNotificacion;
         this.mensajeNotificacion = mensajeNotificacion;
         this.tipoNotificacion = tipoNotificacion;
         this.leidaNotificacion = leidaNotificacion;
-        this.fechaCreacionNotificacion = fechaCreacionNotificacion;
+        this.fechaCreacionN = fechaCreacionN;
         this.usuario = usuario;
         this.coincidencia = coincidencia;
     }
@@ -78,20 +78,20 @@ public class Notificacion {
         this.tipoNotificacion = tipoNotificacion;
     }
 
-    public boolean isLeidaNotificacion() {
+    public Boolean getLeidaNotificacion() {
         return leidaNotificacion;
     }
 
-    public void setLeidaNotificacion(boolean leidaNotificacion) {
+    public void setLeidaNotificacion(Boolean leidaNotificacion) {
         this.leidaNotificacion = leidaNotificacion;
     }
 
-    public LocalDateTime getFechaCreacionNotificacion() {
-        return fechaCreacionNotificacion;
+    public LocalDateTime getFechaCreacionN() {
+        return fechaCreacionN;
     }
 
-    public void setFechaCreacionNotificacion(LocalDateTime fechaCreacionNotificacion) {
-        this.fechaCreacionNotificacion = fechaCreacionNotificacion;
+    public void setFechaCreacionN(LocalDateTime fechaCreacionN) {
+        this.fechaCreacionN = fechaCreacionN;
     }
 
     public Usuarios getUsuario() {

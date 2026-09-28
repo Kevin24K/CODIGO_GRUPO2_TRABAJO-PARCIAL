@@ -14,17 +14,17 @@ public class ReporteDTCinsert {
     @NotBlank(message = "El tipo de reporte no puede ser nulo ni estar vacío")
     private String tipoReporte;
 
-    @NotBlank(message = "La fecha del evento no puede ser nula ni estar vacía")
-    private LocalDate fechaEventoReporte;
+    @NotNull(message = "La fecha del evento no puede ser nula ni estar vacía")
+    private LocalDate fechaeventoR;
 
-    @NotBlank(message = "La hora del evento no puede ser nula ni estar vacía")
-    private LocalTime horaEventoReporte;
+    @NotNull(message = "La hora del evento no puede ser nula ni estar vacía")
+    private LocalTime horaEventoR;
 
-    @NotBlank(message = "La fecha de creación no puede ser nula ni estar vacía")
-    private LocalDateTime fechaCreacionReporte;
+    @NotNull(message = "La fecha de creación no puede ser nula ni estar vacía")
+    private LocalDateTime fechaCreacion;
 
-    @NotBlank(message = "La fecha de actualización no puede ser nula ni estar vacía")
-    private LocalDateTime fechaActualizacionReporte;
+    @NotNull(message = "La fecha de actualización no puede ser nula ni estar vacía")
+    private LocalDateTime fechaActualizacionR;
 
     @NotNull(message = "El Id del Usuario es obligatorio.")
     private Long idUsuario;
@@ -51,36 +51,36 @@ public class ReporteDTCinsert {
         this.tipoReporte = tipoReporte;
     }
 
-    public LocalDate getFechaEventoReporte() {
-        return fechaEventoReporte;
+    public LocalDate getFechaeventoR() {
+        return fechaeventoR;
     }
 
-    public void setFechaEventoReporte(LocalDate fechaEventoReporte) {
-        this.fechaEventoReporte = fechaEventoReporte;
+    public void setFechaeventoR(LocalDate fechaeventoR) {
+        this.fechaeventoR = fechaeventoR;
     }
 
-    public LocalTime getHoraEventoReporte() {
-        return horaEventoReporte;
+    public LocalTime getHoraEventoR() {
+        return horaEventoR;
     }
 
-    public void setHoraEventoReporte(LocalTime horaEventoReporte) {
-        this.horaEventoReporte = horaEventoReporte;
+    public void setHoraEventoR(LocalTime horaEventoR) {
+        this.horaEventoR = horaEventoR;
     }
 
-    public LocalDateTime getFechaCreacionReporte() {
-        return fechaCreacionReporte;
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setFechaCreacionReporte(LocalDateTime fechaCreacionReporte) {
-        this.fechaCreacionReporte = fechaCreacionReporte;
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
-    public LocalDateTime getFechaActualizacionReporte() {
-        return fechaActualizacionReporte;
+    public LocalDateTime getFechaActualizacionR() {
+        return fechaActualizacionR;
     }
 
-    public void setFechaActualizacionReporte(LocalDateTime fechaActualizacionReporte) {
-        this.fechaActualizacionReporte = fechaActualizacionReporte;
+    public void setFechaActualizacionR(LocalDateTime fechaActualizacionR) {
+        this.fechaActualizacionR = fechaActualizacionR;
     }
 
     public Long getIdUsuario() {

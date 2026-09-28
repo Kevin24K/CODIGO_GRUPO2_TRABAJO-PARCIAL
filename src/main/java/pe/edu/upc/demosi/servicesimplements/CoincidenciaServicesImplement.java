@@ -5,6 +5,7 @@ import pe.edu.upc.demosi.repositories.ICoincidenciaRepository;
 import pe.edu.upc.demosi.servicesinterfaces.ICoincidenciaService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CoincidenciaServicesImplement implements ICoincidenciaService {
@@ -26,8 +27,8 @@ public class CoincidenciaServicesImplement implements ICoincidenciaService {
     }
 
     @Override
-    public Coincidencia findById(long id) {
-        return cR.findById(id).orElse(null);
+    public Optional<Coincidencia> listId(Long id) {
+        return cR.findById(id);
     }
 
     @Override

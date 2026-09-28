@@ -16,14 +16,13 @@ public class Rol {
     @Column(name = "descripcionRol", length = 255)
     private String descripcionRol;
 
-    @OneToMany(mappedBy = "rol")
-    private List<Usuarios> usuarios;
+    public Rol() {
+    }
 
-    public Rol(Long idRol, String nombreRol, String descripcionRol, List<Usuarios> usuarios) {
+    public Rol(Long idRol, String nombreRol, String descripcionRol) {
         this.idRol = idRol;
         this.nombreRol = nombreRol;
         this.descripcionRol = descripcionRol;
-        this.usuarios = usuarios;
     }
 
     public Long getIdRol() {
@@ -48,13 +47,5 @@ public class Rol {
 
     public void setDescripcionRol(String descripcionRol) {
         this.descripcionRol = descripcionRol;
-    }
-
-    public List<Usuarios> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuarios> usuarios) {
-        this.usuarios = usuarios;
     }
 }

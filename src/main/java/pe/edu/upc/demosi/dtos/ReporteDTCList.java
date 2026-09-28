@@ -1,19 +1,22 @@
 package pe.edu.upc.demosi.dtos;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class ReporteDTCList {
     private Long idReporte;
+    private String tipoReporte;
+    private LocalDate fechaeventoR;
+    private LocalTime horaEventoR;
+    private LocalDateTime fechaCreacion;
+    private LocalDateTime fechaActualizacionR;
     private Long idUsuario;
     private Long idObjeto;
     private Long idEstadoReporte;
-    private String tipoReporteReporte;
-    private LocalDate fechaEventoReporte;
-    private LocalTime horaEventoReporte;
-    private LocalDateTime fechaCreacionReporte;
-    private LocalDateTime fechaActualizacionReporte;
 
     public Long getIdReporte() {
         return idReporte;
@@ -21,6 +24,46 @@ public class ReporteDTCList {
 
     public void setIdReporte(Long idReporte) {
         this.idReporte = idReporte;
+    }
+
+    public String getTipoReporte() {
+        return tipoReporte;
+    }
+
+    public void setTipoReporte(String tipoReporte) {
+        this.tipoReporte = tipoReporte;
+    }
+
+    public LocalDate getFechaeventoR() {
+        return fechaeventoR;
+    }
+
+    public void setFechaeventoR(LocalDate fechaeventoR) {
+        this.fechaeventoR = fechaeventoR;
+    }
+
+    public LocalTime getHoraEventoR() {
+        return horaEventoR;
+    }
+
+    public void setHoraEventoR(LocalTime horaEventoR) {
+        this.horaEventoR = horaEventoR;
+    }
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public LocalDateTime getFechaActualizacionR() {
+        return fechaActualizacionR;
+    }
+
+    public void setFechaActualizacionR(LocalDateTime fechaActualizacionR) {
+        this.fechaActualizacionR = fechaActualizacionR;
     }
 
     public Long getIdUsuario() {
@@ -45,45 +88,5 @@ public class ReporteDTCList {
 
     public void setIdEstadoReporte(Long idEstadoReporte) {
         this.idEstadoReporte = idEstadoReporte;
-    }
-
-    public String getTipoReporteReporte() {
-        return tipoReporteReporte;
-    }
-
-    public void setTipoReporteReporte(String tipoReporteReporte) {
-        this.tipoReporteReporte = tipoReporteReporte;
-    }
-
-    public LocalDate getFechaEventoReporte() {
-        return fechaEventoReporte;
-    }
-
-    public void setFechaEventoReporte(LocalDate fechaEventoReporte) {
-        this.fechaEventoReporte = fechaEventoReporte;
-    }
-
-    public LocalTime getHoraEventoReporte() {
-        return horaEventoReporte;
-    }
-
-    public void setHoraEventoReporte(LocalTime horaEventoReporte) {
-        this.horaEventoReporte = horaEventoReporte;
-    }
-
-    public LocalDateTime getFechaCreacionReporte() {
-        return fechaCreacionReporte;
-    }
-
-    public void setFechaCreacionReporte(LocalDateTime fechaCreacionReporte) {
-        this.fechaCreacionReporte = fechaCreacionReporte;
-    }
-
-    public LocalDateTime getFechaActualizacionReporte() {
-        return fechaActualizacionReporte;
-    }
-
-    public void setFechaActualizacionReporte(LocalDateTime fechaActualizacionReporte) {
-        this.fechaActualizacionReporte = fechaActualizacionReporte;
     }
 }

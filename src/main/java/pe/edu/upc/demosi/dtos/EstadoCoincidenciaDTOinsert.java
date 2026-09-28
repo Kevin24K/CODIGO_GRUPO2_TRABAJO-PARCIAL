@@ -6,35 +6,35 @@ import java.time.LocalDateTime;
 
 public class EstadoCoincidenciaDTOinsert {
 
-    private long idEstadoCoincidencia;
+    private Long idEstadoCoincidencia;
 
     @NotBlank(message = "El nombre del estado es obligatorio")
-    private String nombre;
+    private String nombreEC;
 
     @NotBlank(message = "La descripción no puede superar los 255 caracteres")
-    private String descripcion;
+    private String descripcionEC;
 
-    public long getIdEstadoCoincidencia() {
+    public Long getIdEstadoCoincidencia() {
         return idEstadoCoincidencia;
     }
 
-    public void setIdEstadoCoincidencia(long idEstadoCoincidencia) {
+    public void setIdEstadoCoincidencia(Long idEstadoCoincidencia) {
         this.idEstadoCoincidencia = idEstadoCoincidencia;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreEC() {
+        return nombreEC;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreEC(String nombreEC) {
+        this.nombreEC = nombreEC;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripcionEC() {
+        return descripcionEC;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcionEC(String descripcionEC) {
+        this.descripcionEC = descripcionEC;
     }
 }

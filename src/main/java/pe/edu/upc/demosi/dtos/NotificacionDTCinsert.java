@@ -1,40 +1,89 @@
 package pe.edu.upc.demosi.dtos;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
 public class NotificacionDTCinsert {
 
-    private long idNotificacion;
+    private Long idNotificacion;
 
     @NotBlank(message = "El id de la coincidencia no puede ser nulo ni estar vacío")
+    private String tituloNotificacion;
+
+    @NotBlank(message = "El id de la coincidencia no puede ser nulo ni estar vacío")
+    private String mensajeNotificacion;
+
+    @NotNull(message = "El id de la coincidencia no puede ser nulo ni estar vacío")
+    private String tipoNotificacion;
+
+    @NotNull(message = "El id de la coincidencia no puede ser nulo ni estar vacío")
+    private Boolean leidaNotificacion;
+
+    @NotNull(message = "El id de la coincidencia no puede ser nulo ni estar vacío")
+    private LocalDateTime fechaCreacionN;
+
+    @NotNull(message = "El Id de usuario es obligatorio.")
+    private Long idUsuario;
+
+    @NotNull(message = "El Id de coincidencia es obligatorio.")
     private Long idCoincidencia;
 
-    @NotBlank(message = "El id del reporte perdido no puede ser nulo ni estar vacío")
-    private Long idReportePerdido;
-
-    @NotBlank(message = "El id del reporte encontrado no puede ser nulo ni estar vacío")
-    private Long idReporteEncontrado;
-
-    @NotBlank(message = "El id del estado de la coincidencia no puede ser nulo ni estar vacío")
-    private Long idEstadoCoincidencia;
-
-    @NotBlank(message = "El porcentaje de similitud no puede ser nulo ni estar vacío")
-    private Double porcentajeSimilitud;
-
-    @NotBlank(message = "El detalle de la coincidencia no puede ser nulo ni estar vacío")
-    private String detalleCoincidencia;
-
-    @NotBlank(message = "La fecha de generación no puede ser nula ni estar vacía")
-    private LocalDateTime fechaGeneracion;
-
-    public long getIdNotificacion() {
+    public Long getIdNotificacion() {
         return idNotificacion;
     }
 
-    public void setIdNotificacion(long idNotificacion) {
+    public void setIdNotificacion(Long idNotificacion) {
         this.idNotificacion = idNotificacion;
+    }
+
+    public String getTituloNotificacion() {
+        return tituloNotificacion;
+    }
+
+    public void setTituloNotificacion(String tituloNotificacion) {
+        this.tituloNotificacion = tituloNotificacion;
+    }
+
+    public String getMensajeNotificacion() {
+        return mensajeNotificacion;
+    }
+
+    public void setMensajeNotificacion(String mensajeNotificacion) {
+        this.mensajeNotificacion = mensajeNotificacion;
+    }
+
+    public String getTipoNotificacion() {
+        return tipoNotificacion;
+    }
+
+    public void setTipoNotificacion(String tipoNotificacion) {
+        this.tipoNotificacion = tipoNotificacion;
+    }
+
+    public Boolean getLeidaNotificacion() {
+        return leidaNotificacion;
+    }
+
+    public void setLeidaNotificacion(Boolean leidaNotificacion) {
+        this.leidaNotificacion = leidaNotificacion;
+    }
+
+    public LocalDateTime getFechaCreacionN() {
+        return fechaCreacionN;
+    }
+
+    public void setFechaCreacionN(LocalDateTime fechaCreacionN) {
+        this.fechaCreacionN = fechaCreacionN;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public Long getIdCoincidencia() {
@@ -43,53 +92,5 @@ public class NotificacionDTCinsert {
 
     public void setIdCoincidencia(Long idCoincidencia) {
         this.idCoincidencia = idCoincidencia;
-    }
-
-    public Long getIdReportePerdido() {
-        return idReportePerdido;
-    }
-
-    public void setIdReportePerdido(Long idReportePerdido) {
-        this.idReportePerdido = idReportePerdido;
-    }
-
-    public Long getIdReporteEncontrado() {
-        return idReporteEncontrado;
-    }
-
-    public void setIdReporteEncontrado(Long idReporteEncontrado) {
-        this.idReporteEncontrado = idReporteEncontrado;
-    }
-
-    public Long getIdEstadoCoincidencia() {
-        return idEstadoCoincidencia;
-    }
-
-    public void setIdEstadoCoincidencia(Long idEstadoCoincidencia) {
-        this.idEstadoCoincidencia = idEstadoCoincidencia;
-    }
-
-    public Double getPorcentajeSimilitud() {
-        return porcentajeSimilitud;
-    }
-
-    public void setPorcentajeSimilitud(Double porcentajeSimilitud) {
-        this.porcentajeSimilitud = porcentajeSimilitud;
-    }
-
-    public String getDetalleCoincidencia() {
-        return detalleCoincidencia;
-    }
-
-    public void setDetalleCoincidencia(String detalleCoincidencia) {
-        this.detalleCoincidencia = detalleCoincidencia;
-    }
-
-    public LocalDateTime getFechaGeneracion() {
-        return fechaGeneracion;
-    }
-
-    public void setFechaGeneracion(LocalDateTime fechaGeneracion) {
-        this.fechaGeneracion = fechaGeneracion;
     }
 }

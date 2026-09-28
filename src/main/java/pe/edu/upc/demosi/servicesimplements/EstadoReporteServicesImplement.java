@@ -1,10 +1,12 @@
 package pe.edu.upc.demosi.servicesimplements;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.demosi.entities.EstadoReporte;
+import pe.edu.upc.demosi.entities.Rol;
 import pe.edu.upc.demosi.repositories.IEstadoReporteRepository;
 import pe.edu.upc.demosi.servicesinterfaces.IEstadoReporteService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EstadoReporteServicesImplement implements IEstadoReporteService {
@@ -25,8 +27,8 @@ public class EstadoReporteServicesImplement implements IEstadoReporteService {
     }
 
     @Override
-    public EstadoReporte findById(long id) {
-        return eR.findById(id).orElse(null);
+    public Optional<EstadoReporte> listId(Long id) {
+        return eR.findById(id);
     }
 
     @Override

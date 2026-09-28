@@ -5,6 +5,7 @@ import pe.edu.upc.demosi.repositories.IEstadoCoincidenciaRepository;
 import pe.edu.upc.demosi.servicesinterfaces.IEstadoCoincidenciaService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EstadoCoincidenciaServicesImplement implements IEstadoCoincidenciaService {
@@ -26,8 +27,8 @@ public class EstadoCoincidenciaServicesImplement implements IEstadoCoincidenciaS
     }
 
     @Override
-    public EstadoCoincidencia findById(long id) {
-        return eR.findById(id).orElse(null);
+    public Optional<EstadoCoincidencia> listId(Long id) {
+        return eR.findById(id);
     }
 
     @Override

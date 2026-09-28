@@ -1,15 +1,15 @@
 package pe.edu.upc.demosi.dtos;
 
 public class RolDTCList {
-    private long idRol;
+    private Long idRol;
     private String nombreRol;
     private String descripcionRol;
 
-    public long getIdRol() {
+    public Long getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(long idRol) {
+    public void setIdRol(Long idRol) {
         this.idRol = idRol;
     }
 
