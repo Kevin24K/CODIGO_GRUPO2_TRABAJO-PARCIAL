@@ -55,7 +55,7 @@ public class ControllerReporte {
     public ResponseEntity<ReporteDTCinsert> registrar(
             @Valid @RequestBody ReporteDTCinsert dto) {
         // 1. Validamos las 3 dependencias (Lanzando 400 Bad Request si alguna falla)
-        Usuarios usuario = uS.listId(dto.getIdUsuario()) // Ajusta a findById si tu método se llama así
+        Usuarios usuario = uS.listId(dto.getIdUsuario())
                 .orElseThrow(() -> new ResourceNotFoundException("No existe el usuario con id: " + dto.getIdUsuario()));
 
         Objeto objeto = oS.listId(dto.getIdObjeto())

@@ -66,7 +66,7 @@ public class ControllerNotificacion {
         noti.setCoincidencia(coincidencia);
 
         // 4. Asignación manual de fecha de creación (si no usas @PrePersist en la entidad)
-        noti.setFechaCreacionN(LocalDateTime.now()); // Asegúrate de que el método coincida con el de tu entidad Notificacion
+        noti.setFechaCreacionN(LocalDateTime.now()); // Asegúrate de que el metodo coincida con noti
 
         // 5. Guardamos en la base de datos
         nS.insert(noti);

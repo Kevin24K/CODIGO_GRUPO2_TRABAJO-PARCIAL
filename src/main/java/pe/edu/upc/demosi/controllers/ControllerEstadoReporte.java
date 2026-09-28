@@ -23,7 +23,7 @@ public class ControllerEstadoReporte {
         this.modelMapper = modelMapper;
     }
 
-    // 1. MÉTODO PARA LISTAR (Usa el DTCList)
+
     @GetMapping
     public ResponseEntity<List<EstadoReporteDTOList>>listar() {
 
@@ -35,7 +35,7 @@ public class ControllerEstadoReporte {
         return ResponseEntity.ok(lista);
     }
 
-    // 2. MÉTODO PARA CREAR (Usa el DTCinsert)
+
     @PostMapping
     public ResponseEntity<EstadoReporteDTOinsert> registrar(
             @Valid @RequestBody EstadoReporteDTOinsert dto) {

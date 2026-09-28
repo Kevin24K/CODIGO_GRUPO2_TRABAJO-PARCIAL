@@ -60,7 +60,6 @@ public class ControllerObjeto {
         // 4. Mapeamos de vuelta al DTO para armar la respuesta
         ObjetoDTCinsert responseDTO = modelMapper.map(objeto, ObjetoDTCinsert.class);
 
-        // 5. Generamos la URL y devolvemos el código 201 Created
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
