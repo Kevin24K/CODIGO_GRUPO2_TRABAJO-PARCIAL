@@ -1,81 +1,38 @@
 package pe.edu.upc.demosi.dtos;
 
-import pe.edu.upc.demosi.entities.Rol;
-
 import java.time.LocalDateTime;
 
 public class UsuarioDTCList {
-
     private Long idUsuario;
-    private String nameUsuario;
-    private String apellidoUsuario;
-    private String correoUsuario;
-    private String ucontrasenaHash;
-    private LocalDateTime FechaRegistroUsuario;
-    private Boolean activoUsuarios;
-    private Rol rol;
+    private String nombre;
+    private String apellido;
+    private String correo;
+    private LocalDateTime fechaRegistro;
+    private boolean activo;
+    private Long idRol;
+    private String nombreRol;
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+    public Long getIdUsuario() { return idUsuario; }
+    public void setIdUsuario(Long idUsuario) { this.idUsuario = idUsuario; }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getNameUsuario() {
-        return nameUsuario;
-    }
+    public String getApellido() { return apellido; }
+    public void setApellido(String apellido) { this.apellido = apellido; }
 
-    public void setNameUsuario(String nameUsuario) {
-        this.nameUsuario = nameUsuario;
-    }
+    public String getCorreo() { return correo; }
+    public void setCorreo(String correo) { this.correo = correo; }
 
-    public String getApellidoUsuario() {
-        return apellidoUsuario;
-    }
+    public LocalDateTime getFechaRegistro() { return fechaRegistro; }
+    public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
 
-    public void setApellidoUsuario(String apellidoUsuario) {
-        this.apellidoUsuario = apellidoUsuario;
-    }
+    public boolean isActivo() { return activo; }
+    public void setActivo(boolean activo) { this.activo = activo; }
 
-    public String getCorreoUsuario() {
-        return correoUsuario;
-    }
+    public Long getIdRol() { return idRol; }
+    public void setIdRol(Long idRol) { this.idRol = idRol; }
 
-    public void setCorreoUsuario(String correoUsuario) {
-        this.correoUsuario = correoUsuario;
-    }
-
-    public String getUcontrasenaHash() {
-        return ucontrasenaHash;
-    }
-
-    public void setUcontrasenaHash(String ucontrasenaHash) {
-        this.ucontrasenaHash = ucontrasenaHash;
-    }
-
-    public LocalDateTime getFechaRegistroUsuario() {
-        return FechaRegistroUsuario;
-    }
-
-    public void setFechaRegistroUsuario(LocalDateTime fechaRegistroUsuario) {
-        FechaRegistroUsuario = fechaRegistroUsuario;
-    }
-
-    public Boolean getActivoUsuarios() {
-        return activoUsuarios;
-    }
-
-    public void setActivoUsuarios(Boolean activoUsuarios) {
-        this.activoUsuarios = activoUsuarios;
-    }
-
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
+    public String getNombreRol() { return nombreRol; }
+    public void setNombreRol(String nombreRol) { this.nombreRol = nombreRol; }
 }

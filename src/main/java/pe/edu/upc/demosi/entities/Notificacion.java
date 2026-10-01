@@ -26,7 +26,7 @@ public class Notificacion {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuarios usuario;
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_coincidencia") // Puede ser nullable si hay notificaciones genéricas del sistema
@@ -35,7 +35,7 @@ public class Notificacion {
     public Notificacion() {
     }
 
-    public Notificacion(Long idNotificacion, String tituloNotificacion, String mensajeNotificacion, String tipoNotificacion, Boolean leidaNotificacion, LocalDateTime fechaCreacionN, Usuarios usuario, Coincidencia coincidencia) {
+    public Notificacion(Long idNotificacion, String tituloNotificacion, String mensajeNotificacion, String tipoNotificacion, Boolean leidaNotificacion, LocalDateTime fechaCreacionN, Usuario usuario, Coincidencia coincidencia) {
         this.idNotificacion = idNotificacion;
         this.tituloNotificacion = tituloNotificacion;
         this.mensajeNotificacion = mensajeNotificacion;
@@ -94,11 +94,11 @@ public class Notificacion {
         this.fechaCreacionN = fechaCreacionN;
     }
 
-    public Usuarios getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuarios usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

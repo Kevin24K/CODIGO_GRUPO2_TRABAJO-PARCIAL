@@ -1,73 +1,85 @@
 package pe.edu.upc.demosi.controllers;
 
 import jakarta.validation.Valid;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pe.edu.upc.demosi.dtos.UsuarioDTCList;
 import pe.edu.upc.demosi.dtos.UsuarioDTCinsert;
 import pe.edu.upc.demosi.entities.Rol;
-import pe.edu.upc.demosi.entities.Usuarios;
+import pe.edu.upc.demosi.entities.Usuario;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.servicesinterfaces.IRolService;
 import pe.edu.upc.demosi.servicesinterfaces.IUsuarioService;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/Usuarios")
 public class ControllerUsuario {
+
     private final IUsuarioService uS;
     private final IRolService rS;
-    private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public ControllerUsuario(IUsuarioService uS, IRolService rS, ModelMapper modelMapper) {
+    public ControllerUsuario(IUsuarioService uS, IRolService rS, PasswordEncoder passwordEncoder) {
         this.uS = uS;
         this.rS = rS;
-        this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UsuarioDTCList>> listar() {
-
         List<UsuarioDTCList> lista = uS.list()
                 .stream()
-                .map(usuarios -> modelMapper.map(usuarios, UsuarioDTCList.class))
+                .map(this::toListDTO)
                 .toList();
-
         return ResponseEntity.ok(lista);
     }
+
     @PostMapping
-    public ResponseEntity<UsuarioDTCinsert> registrar(
-            @Valid @RequestBody UsuarioDTCinsert dto) {
-        // 1. Validamos y obtenemos el Rol
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<UsuarioDTCList> registrar(@Valid @RequestBody UsuarioDTCinsert dto) {
+
         Rol rol = rS.listId(dto.getIdRol())
                 .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "No existe el rol con el id: " + dto.getIdRol()
-                        ));
-        // 3. SOLUCIÓN: Faltaba crear la variable 'act' y pasarle la contraseña y el rol
-        Usuarios act = modelMapper.map(dto, Usuarios.class);
-        act.setUcontrasenaHash(dto.getUcontrasenaHash());
-        act.setRol(rol);
+                        new ResourceNotFoundException("No existe el rol con el id: " + dto.getIdRol()));
 
-        // 3. Guardamos
-        uS.insert(act);
+        Usuario usuario = new Usuario();
+        usuario.setNombre(dto.getNombre());
+        usuario.setApellido(dto.getApellido());
+        usuario.setCorreo(dto.getCorreo());
+        usuario.setContrasenaHash(passwordEncoder.encode(dto.getContrasena()));
+        usuario.setRol(rol);
+        usuario.setFechaRegistro(LocalDateTime.now());
+        usuario.setActivo(true);
 
-        // 4. Mapeamos de vuelta al DTO para la respuesta
-        UsuarioDTCinsert responseDTO = modelMapper.map(act, UsuarioDTCinsert.class);
+        uS.insert(usuario);
 
-        // 5. Generamos la URL y devolvemos la respuesta
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(act.getIdUsuario())
+                .buildAndExpand(usuario.getIdUsuario())
                 .toUri();
 
-        return ResponseEntity
-                .created(location)
-                .body(responseDTO);
+        return ResponseEntity.created(location).body(toListDTO(usuario));
+    }
+
+    private UsuarioDTCList toListDTO(Usuario u) {
+        UsuarioDTCList dto = new UsuarioDTCList();
+        dto.setIdUsuario(u.getIdUsuario());
+        dto.setNombre(u.getNombre());
+        dto.setApellido(u.getApellido());
+        dto.setCorreo(u.getCorreo());
+        dto.setFechaRegistro(u.getFechaRegistro());
+        dto.setActivo(u.isActivo());
+        dto.setIdRol(u.getRol().getIdRol());
+        dto.setNombreRol(u.getRol().getNombreRol());
+        return dto;
     }
 }
