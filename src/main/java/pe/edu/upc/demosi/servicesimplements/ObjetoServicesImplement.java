@@ -1,10 +1,12 @@
 package pe.edu.upc.demosi.servicesimplements;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.demosi.entities.Objeto;
+
 import pe.edu.upc.demosi.repositories.IObjetoRepository;
 import pe.edu.upc.demosi.servicesinterfaces.IObjetoService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ObjetoServicesImplement implements IObjetoService {
@@ -25,12 +27,18 @@ public class ObjetoServicesImplement implements IObjetoService {
     }
 
     @Override
-    public Objeto findById(long id) {
-        return oR.findById(id).orElse(null);
-    }
-
-    @Override
     public void delete(long id) {
         oR.deleteById(id);
     }
+
+    @Override
+    public Optional<Objeto> listId(Long id) {
+        return oR.findById(id);
+    }
+
+    @Override
+    public List<Objeto> listarPorCategoria(long idCategoria) {
+        return oR.findByCategoria_IdCategoria(idCategoria);
+    }
+
 }

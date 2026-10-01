@@ -5,6 +5,7 @@ import pe.edu.upc.demosi.repositories.INotificacionRepository;
 import pe.edu.upc.demosi.servicesinterfaces.INotificacionService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NotificacionServicesImplement implements INotificacionService {
@@ -26,12 +27,17 @@ public class NotificacionServicesImplement implements INotificacionService {
     }
 
     @Override
-    public Notificacion findById(long id) {
-        return nR.findById(id).orElse(null);
+    public Optional<Notificacion> listId(Long id) {
+        return nR.findById(id);
     }
 
     @Override
     public void delete(long id) {
         nR.deleteById(id);
+    }
+
+    @Override
+    public List<Notificacion> listarPorUsuario(long idUsuario) {
+        return nR.findByUsuario_IdUsuario(idUsuario);
     }
 }

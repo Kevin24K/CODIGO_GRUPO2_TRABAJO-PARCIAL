@@ -6,6 +6,8 @@ import pe.edu.upc.demosi.repositories.IReporteRepository;
 import pe.edu.upc.demosi.servicesinterfaces.IReporteService;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ReporteServicesImplement implements IReporteService {
 
@@ -26,12 +28,22 @@ public class ReporteServicesImplement implements IReporteService {
     }
 
     @Override
-    public Reporte findById(long id) {
-        return rR.findById(id).orElse(null);
+    public Optional<Reporte> listId(Long id) {
+        return rR.findById(id);
     }
 
     @Override
     public void delete(long id) {
         rR.deleteById(id);
+    }
+
+    @Override
+    public List<Reporte> listarPorUsuario(long idUsuario) {
+        return rR.findByUsuario_IdUsuario(idUsuario);
+    }
+
+    @Override
+    public List<Reporte> listarPorEstado(long idEstadoReporte) {
+        return rR.findByEstadoReporte_IdEstadoReporte(idEstadoReporte);
     }
 }

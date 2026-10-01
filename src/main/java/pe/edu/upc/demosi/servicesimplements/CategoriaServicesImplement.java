@@ -5,6 +5,7 @@ import pe.edu.upc.demosi.repositories.ICategoriaRepository;
 import pe.edu.upc.demosi.servicesinterfaces.ICategoriaService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriaServicesImplement implements ICategoriaService {
@@ -25,12 +26,13 @@ public class CategoriaServicesImplement implements ICategoriaService {
     }
 
     @Override
-    public Categoria findById(long id) {
-        return cR.findById(id).orElse(null);
-    }
-
-    @Override
     public void delete(long id) {
         cR.deleteById(id);
     }
+
+    @Override
+    public Optional<Categoria> listId(Long id) {
+        return cR.findById(id);
+    }
+
 }

@@ -1,46 +1,74 @@
 package pe.edu.upc.demosi.controllers;
 
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pe.edu.upc.demosi.dtos.CoincidenciaDTCList;
+import pe.edu.upc.demosi.dtos.CoincidenciaDTCinsert;
 import pe.edu.upc.demosi.entities.Coincidencia;
+import pe.edu.upc.demosi.entities.EstadoCoincidencia;
+import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.servicesinterfaces.ICoincidenciaService;
+import pe.edu.upc.demosi.servicesinterfaces.IEstadoCoincidenciaService;
+
+import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/coincidencias")
+@RequestMapping("/api/Coincidencias")
 public class ControllerCoincidencia {
+    private final ICoincidenciaService cR;
+    private final IEstadoCoincidenciaService eR;
+    private final ModelMapper modelMapper;
 
-    private final ICoincidenciaService cS;
-
-    public ControllerCoincidencia(ICoincidenciaService cS) {
-        this.cS = cS;
+    public ControllerCoincidencia(ICoincidenciaService cR, ModelMapper modelMapper,IEstadoCoincidenciaService eR) {
+        this.cR = cR;
+        this.eR=eR;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Coincidencia>> listar() {
-        return ResponseEntity.ok(cS.list());
-    }
+    public ResponseEntity<List<CoincidenciaDTCList>> listar() {
 
-    @GetMapping("/pendientes")
-    public ResponseEntity<List<Coincidencia>> listarPendientes() {
-        return ResponseEntity.ok(cS.listPendientes());
-    }
+        List<CoincidenciaDTCList> lista = cR.list()
+                .stream()
+                .map(categoria -> modelMapper.map(categoria, CoincidenciaDTCList.class))
+                .toList();
 
-    @GetMapping("/con-detalle")
-    public ResponseEntity<List<Object[]>> listarConDetalle() {
-        return ResponseEntity.ok(cS.listConDetalle());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> listarPorId(@PathVariable Long id) {
-        return cS.listById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping
-    public ResponseEntity<Coincidencia> registrar(@RequestBody Coincidencia coincidencia) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(cS.insert(coincidencia));
+    public ResponseEntity<CoincidenciaDTCinsert> registrar(
+            @Valid @RequestBody CoincidenciaDTCinsert dto) {
+        // 1. Validamos y obtenemos el Rol
+        EstadoCoincidencia estado = eR.listId(dto.getIdEstadoCoincidencia())
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "No existe el estado coincidencia con id: " + dto.getIdEstadoCoincidencia()
+                        ));
+        // 3. SOLUCIÓN: Faltaba crear la variable 'act' y pasarle la contraseña y el rol
+        Coincidencia Co = modelMapper.map(dto, Coincidencia.class);
+        Co.setEstadoCoincidencia(estado);
+
+        // 3. Guardamos
+        cR.insert(Co);
+
+        // 4. Mapeamos de vuelta al DTO para la respuesta
+        CoincidenciaDTCinsert responseDTO = modelMapper.map(Co, CoincidenciaDTCinsert.class);
+
+        // 5. Generamos la URL y devolvemos la respuesta
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(Co.getIdCoincidencia())
+                .toUri();
+
+        return ResponseEntity
+                .created(location)
+                .body(responseDTO);
     }
+
 }

@@ -1,45 +1,16 @@
-package pe.edu.upc.demosi.entities;
-import jakarta.persistence.*;
+package pe.edu.upc.demosi.dtos;
 
-@Entity
-@Table(name = "Objeto")
-public class Objeto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import pe.edu.upc.demosi.entities.Categoria;
+
+public class ObjetoDTCList {
+
     private Long idObjeto;
-
-    @Column(name = "nombre_objeto", length = 100, nullable = false)
     private String nombreObjeto;
-
-    @Column(name = "descripcionObjeto", columnDefinition = "TEXT")
     private String descripcionObjeto;
-
-    @Column(name = "colorObjeto", length = 50)
     private String colorObjeto;
-
-    @Column(name = "marcaObjeto", length = 100)
     private String marcaObjeto;
-
-    @Column(name = "activoObjeto", nullable = false)
     private Boolean activoObjeto;
-
-    @ManyToOne
-    @JoinColumn(name = "id_categoria", nullable = false)
     private Categoria categoria;
-
-    public Objeto() {
-    }
-
-    public Objeto(Long idObjeto, String nombreObjeto, String descripcionObjeto, String colorObjeto, String marcaObjeto, Boolean activoObjeto, Categoria categoria) {
-        this.idObjeto = idObjeto;
-
-        this.nombreObjeto = nombreObjeto;
-        this.descripcionObjeto = descripcionObjeto;
-        this.colorObjeto = colorObjeto;
-        this.marcaObjeto = marcaObjeto;
-        this.activoObjeto = activoObjeto;
-        this.categoria = categoria;
-    }
 
     public Long getIdObjeto() {
         return idObjeto;
@@ -81,7 +52,7 @@ public class Objeto {
         this.marcaObjeto = marcaObjeto;
     }
 
-    public Boolean isActivoObjeto() {
+    public Boolean getActivoObjeto() {
         return activoObjeto;
     }
 

@@ -1,45 +1,28 @@
-package pe.edu.upc.demosi.entities;
-import jakarta.persistence.*;
+package pe.edu.upc.demosi.dtos;
 
-@Entity
-@Table(name = "Objeto")
-public class Objeto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public class ObjetoDTCinsert {
     private Long idObjeto;
 
-    @Column(name = "nombre_objeto", length = 100, nullable = false)
+    @NotBlank(message = "El nombre del objeto no puede ser nulo ni estar vacío")
     private String nombreObjeto;
 
-    @Column(name = "descripcionObjeto", columnDefinition = "TEXT")
+    @NotBlank(message = "La descripción del objeto no puede ser nula ni estar vacía")
     private String descripcionObjeto;
 
-    @Column(name = "colorObjeto", length = 50)
+    @NotBlank(message = "El color del objeto no puede ser nulo ni estar vacío")
     private String colorObjeto;
 
-    @Column(name = "marcaObjeto", length = 100)
+    @NotBlank(message = "La marca del objeto no puede ser nula ni estar vacía")
     private String marcaObjeto;
 
-    @Column(name = "activoObjeto", nullable = false)
+    @NotNull(message = "El estado del objeto no puede ser nulo ni estar vacío")
     private Boolean activoObjeto;
 
-    @ManyToOne
-    @JoinColumn(name = "id_categoria", nullable = false)
-    private Categoria categoria;
-
-    public Objeto() {
-    }
-
-    public Objeto(Long idObjeto, String nombreObjeto, String descripcionObjeto, String colorObjeto, String marcaObjeto, Boolean activoObjeto, Categoria categoria) {
-        this.idObjeto = idObjeto;
-
-        this.nombreObjeto = nombreObjeto;
-        this.descripcionObjeto = descripcionObjeto;
-        this.colorObjeto = colorObjeto;
-        this.marcaObjeto = marcaObjeto;
-        this.activoObjeto = activoObjeto;
-        this.categoria = categoria;
-    }
+    @NotNull(message = "El Id de la Categoría es obligatorio.")
+    private Long idCategoria;
 
     public Long getIdObjeto() {
         return idObjeto;
@@ -81,7 +64,7 @@ public class Objeto {
         this.marcaObjeto = marcaObjeto;
     }
 
-    public Boolean isActivoObjeto() {
+    public Boolean getActivoObjeto() {
         return activoObjeto;
     }
 
@@ -89,11 +72,11 @@ public class Objeto {
         this.activoObjeto = activoObjeto;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Long getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
     }
 }

@@ -1,31 +1,10 @@
-package pe.edu.upc.demosi.entities;
-import jakarta.persistence.*;
+package pe.edu.upc.demosi.dtos;
 
-@Entity
-@Table(name = "Categoria")
-public class Categoria {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CategoriaDTCList {
     private Long idCategoria;
-
-    @Column(name = "nombreCategoria", length = 100, nullable = false)
     private String nombreCategoria;
-
-    @Column(name = "descripcionCategoria", length = 255)
     private String descripcionCategoria;
-
-    @Column(name = "activoCategoria", nullable = false)
     private Boolean activoCategoria;
-
-    public Categoria() {
-    }
-
-    public Categoria(Long idCategoria, String nombreCategoria, String descripcionCategoria, Boolean  activoCategoria) {
-        this.idCategoria = idCategoria;
-        this.nombreCategoria = nombreCategoria;
-        this.descripcionCategoria = descripcionCategoria;
-        this.activoCategoria = activoCategoria;
-    }
 
     public Long getIdCategoria() {
         return idCategoria;
@@ -51,7 +30,7 @@ public class Categoria {
         this.descripcionCategoria = descripcionCategoria;
     }
 
-    public Boolean getActivoCategoria() {
+    public Boolean isActivoCategoria() {
         return activoCategoria;
     }
 

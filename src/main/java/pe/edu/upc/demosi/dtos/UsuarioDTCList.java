@@ -1,13 +1,19 @@
 package pe.edu.upc.demosi.dtos;
 
-import java.time.LocalDate;
+import pe.edu.upc.demosi.entities.Rol;
+
+import java.time.LocalDateTime;
 
 public class UsuarioDTCList {
+
     private Long idUsuario;
-    private String nombreUsuario;
+    private String nameUsuario;
     private String apellidoUsuario;
     private String correoUsuario;
-    private LocalDate fechaRegistroUsuario;
+    private String ucontrasenaHash;
+    private LocalDateTime FechaRegistroUsuario;
+    private Boolean activoUsuarios;
+    private Rol rol;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -17,12 +23,12 @@ public class UsuarioDTCList {
         this.idUsuario = idUsuario;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getNameUsuario() {
+        return nameUsuario;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setNameUsuario(String nameUsuario) {
+        this.nameUsuario = nameUsuario;
     }
 
     public String getApellidoUsuario() {
@@ -41,11 +47,35 @@ public class UsuarioDTCList {
         this.correoUsuario = correoUsuario;
     }
 
-    public LocalDate getFechaRegistroUsuario() {
-        return fechaRegistroUsuario;
+    public String getUcontrasenaHash() {
+        return ucontrasenaHash;
     }
 
-    public void setFechaRegistroUsuario(LocalDate fechaRegistroUsuario) {
-        this.fechaRegistroUsuario = fechaRegistroUsuario;
+    public void setUcontrasenaHash(String ucontrasenaHash) {
+        this.ucontrasenaHash = ucontrasenaHash;
+    }
+
+    public LocalDateTime getFechaRegistroUsuario() {
+        return FechaRegistroUsuario;
+    }
+
+    public void setFechaRegistroUsuario(LocalDateTime fechaRegistroUsuario) {
+        FechaRegistroUsuario = fechaRegistroUsuario;
+    }
+
+    public Boolean getActivoUsuarios() {
+        return activoUsuarios;
+    }
+
+    public void setActivoUsuarios(Boolean activoUsuarios) {
+        this.activoUsuarios = activoUsuarios;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }

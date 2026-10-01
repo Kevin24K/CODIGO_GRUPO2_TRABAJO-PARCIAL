@@ -1,28 +1,16 @@
-package pe.edu.upc.demosi.entities;
-import jakarta.persistence.*;
+package pe.edu.upc.demosi.dtos;
 
+import jakarta.validation.constraints.NotBlank;
 
-@Entity
-@Table(name = "EstadoCoincidencia")
-public class EstadoCoincidencia {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EstadoCoincidenciaDTOinsert {
+
     private Long idEstadoCoincidencia;
 
-    @Column(name = "nombre_estado_coincidencia", length = 50, nullable = false)
+    @NotBlank(message = "El nombre del estado es obligatorio")
     private String nombreEC;
 
-    @Column(name = "descripcionEstadoCoincidencia", length = 255)
+    @NotBlank(message = "La descripción no puede superar los 255 caracteres")
     private String descripcionEC;
-
-    public EstadoCoincidencia() {
-    }
-
-    public EstadoCoincidencia(Long idEstadoCoincidencia, String nombreEC, String descripcionEC) {
-        this.idEstadoCoincidencia = idEstadoCoincidencia;
-        this.nombreEC = nombreEC;
-        this.descripcionEC = descripcionEC;
-    }
 
     public Long getIdEstadoCoincidencia() {
         return idEstadoCoincidencia;

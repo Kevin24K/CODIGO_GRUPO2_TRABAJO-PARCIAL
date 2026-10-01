@@ -11,9 +11,6 @@ public class Usuarios {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
-    @Column(name = "id_rol",nullable = false)
-    private String idRol;
-
     @Column(name = "nameUsuario",length = 100,nullable = false)
     private String nameUsuario;
 
@@ -23,27 +20,31 @@ public class Usuarios {
     @Column(name = "correoUsuario",length = 100,nullable = false)
     private String correoUsuario;
 
-    @Column(name = "contraseñaHashUsuario",length = 255,nullable = false)
-    private String contraseñaHashUsuario;
+    @Column(name = "ucontrasena_hash", length = 255, nullable = false)
+    private String ucontrasenaHash;
 
-    @Column(name = "FechaRegistroUsuario",nullable = false)
-    private LocalDateTime FechaRegistroUsuario;
+    @Column(name = "fecha_registro_usuario",nullable = false)
+    private LocalDateTime fechaRegistroUsuario;
 
     @Column(name = "activoUsuarios", nullable = false)
-    private boolean activoUsuarios;
+    private Boolean activoUsuarios;
+
+    @ManyToOne
+    @JoinColumn(name = "id_rol", nullable = false)
+    private Rol rol;
 
     public Usuarios() {
     }
 
-    public Usuarios(Long idUsuario, String idRol, String nameUsuario, String apellidoUsuario, String correoUsuario, String contraseñaHashUsuario, LocalDateTime fechaRegistroUsuario, boolean activoUsuarios) {
+    public Usuarios(Long idUsuario, String nameUsuario, String apellidoUsuario, String correoUsuario, String ucontrasenaHash, LocalDateTime fechaRegistroUsuario, Boolean activoUsuarios, Rol rol) {
         this.idUsuario = idUsuario;
-        this.idRol = idRol;
         this.nameUsuario = nameUsuario;
         this.apellidoUsuario = apellidoUsuario;
         this.correoUsuario = correoUsuario;
-        this.contraseñaHashUsuario = contraseñaHashUsuario;
-        FechaRegistroUsuario = fechaRegistroUsuario;
+        this.ucontrasenaHash = ucontrasenaHash;
+        this.fechaRegistroUsuario = fechaRegistroUsuario;
         this.activoUsuarios = activoUsuarios;
+        this.rol = rol;
     }
 
     public Long getIdUsuario() {
@@ -52,14 +53,6 @@ public class Usuarios {
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public String getIdRol() {
-        return idRol;
-    }
-
-    public void setIdRol(String idRol) {
-        this.idRol = idRol;
     }
 
     public String getNameUsuario() {
@@ -86,27 +79,35 @@ public class Usuarios {
         this.correoUsuario = correoUsuario;
     }
 
-    public String getContraseñaHashUsuario() {
-        return contraseñaHashUsuario;
+    public String getUcontrasenaHash() {
+        return ucontrasenaHash;
     }
 
-    public void setContraseñaHashUsuario(String contraseñaHashUsuario) {
-        this.contraseñaHashUsuario = contraseñaHashUsuario;
+    public void setUcontrasenaHash(String ucontrasenaHash) {
+        this.ucontrasenaHash = ucontrasenaHash;
     }
 
     public LocalDateTime getFechaRegistroUsuario() {
-        return FechaRegistroUsuario;
+        return fechaRegistroUsuario;
     }
 
     public void setFechaRegistroUsuario(LocalDateTime fechaRegistroUsuario) {
-        FechaRegistroUsuario = fechaRegistroUsuario;
+        this.fechaRegistroUsuario = fechaRegistroUsuario;
     }
 
-    public boolean isActivoUsuarios() {
+    public Boolean getActivoUsuarios() {
         return activoUsuarios;
     }
 
-    public void setActivoUsuarios(boolean activoUsuarios) {
+    public void setActivoUsuarios(Boolean activoUsuarios) {
         this.activoUsuarios = activoUsuarios;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }

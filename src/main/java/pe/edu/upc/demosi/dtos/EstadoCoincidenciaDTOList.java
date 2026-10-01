@@ -1,28 +1,10 @@
-package pe.edu.upc.demosi.entities;
-import jakarta.persistence.*;
+package pe.edu.upc.demosi.dtos;
 
+public class EstadoCoincidenciaDTOList {
 
-@Entity
-@Table(name = "EstadoCoincidencia")
-public class EstadoCoincidencia {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstadoCoincidencia;
-
-    @Column(name = "nombre_estado_coincidencia", length = 50, nullable = false)
     private String nombreEC;
-
-    @Column(name = "descripcionEstadoCoincidencia", length = 255)
     private String descripcionEC;
-
-    public EstadoCoincidencia() {
-    }
-
-    public EstadoCoincidencia(Long idEstadoCoincidencia, String nombreEC, String descripcionEC) {
-        this.idEstadoCoincidencia = idEstadoCoincidencia;
-        this.nombreEC = nombreEC;
-        this.descripcionEC = descripcionEC;
-    }
 
     public Long getIdEstadoCoincidencia() {
         return idEstadoCoincidencia;

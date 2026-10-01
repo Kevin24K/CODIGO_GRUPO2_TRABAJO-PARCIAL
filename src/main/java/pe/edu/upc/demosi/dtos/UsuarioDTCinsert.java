@@ -3,35 +3,47 @@ package pe.edu.upc.demosi.dtos;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class UsuarioDTCinsert {
 
+    private Long idUsuario;
+
     @NotBlank(message = "El nombre del usuario no puede ser nulo ni estar vacío")
-    private String nombreUsuario;
+    private String nameUsuario;
 
     @NotBlank(message = "El apellido del usuario no puede ser nulo ni estar vacío")
     private String apellidoUsuario;
 
     @NotBlank(message = "El correo del usuario no puede ser nulo ni estar vacío")
-    private String correoUsuairo;
+    private String correoUsuario;
 
     @NotBlank(message = "La contraseña del usuario no puede ser nulo ni estar vacío")
-    private String contrasenaHashUsuario;
+    private String ucontrasenaHash;
 
-    @NotBlank(message = "El rol del usuario no puede ser nulo ni estar vacío")
+    @NotNull(message = "El rol del usuario no puede ser nulo ni estar vacío")
     private LocalDateTime fechaRegistroUsuario;
 
-    @NotBlank(message = "El estado del usuario es obligatorio")
-    private boolean activo;
+    @NotNull(message = "El estado del usuario es obligatorio")
+    private Boolean activoUsuarios;
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    @NotNull(message = "El Id del Rol es obligatorio.")
+    private Long idRol;
+
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNameUsuario() {
+        return nameUsuario;
+    }
+
+    public void setNameUsuario(String nameUsuario) {
+        this.nameUsuario = nameUsuario;
     }
 
     public String getApellidoUsuario() {
@@ -42,20 +54,20 @@ public class UsuarioDTCinsert {
         this.apellidoUsuario = apellidoUsuario;
     }
 
-    public String getCorreoUsuairo() {
-        return correoUsuairo;
+    public String getCorreoUsuario() {
+        return correoUsuario;
     }
 
-    public void setCorreoUsuairo(String correoUsuairo) {
-        this.correoUsuairo = correoUsuairo;
+    public void setCorreoUsuario(String correoUsuario) {
+        this.correoUsuario = correoUsuario;
     }
 
-    public String getContrasenaHashUsuario() {
-        return contrasenaHashUsuario;
+    public String getUcontrasenaHash() {
+        return ucontrasenaHash;
     }
 
-    public void setContrasenaHashUsuario(String contrasenaHashUsuario) {
-        this.contrasenaHashUsuario = contrasenaHashUsuario;
+    public void setUcontrasenaHash(String ucontrasenaHash) {
+        this.ucontrasenaHash = ucontrasenaHash;
     }
 
     public LocalDateTime getFechaRegistroUsuario() {
@@ -66,11 +78,19 @@ public class UsuarioDTCinsert {
         this.fechaRegistroUsuario = fechaRegistroUsuario;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public Boolean getActivoUsuarios() {
+        return activoUsuarios;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setActivoUsuarios(Boolean activoUsuarios) {
+        this.activoUsuarios = activoUsuarios;
+    }
+
+    public Long getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(Long idRol) {
+        this.idRol = idRol;
     }
 }

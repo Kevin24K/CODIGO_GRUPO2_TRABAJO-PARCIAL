@@ -1,27 +1,16 @@
-package pe.edu.upc.demosi.entities;
-import jakarta.persistence.*;
+package pe.edu.upc.demosi.dtos;
 
-@Entity
-@Table(name = "Rol")
-public class Rol {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import jakarta.validation.constraints.NotBlank;
+
+public class RolDTCinsert {
+
     private Long idRol;
 
-    @Column(name = "nombreRol", length = 100, nullable = false)
+    @NotBlank(message = "El nombre del rol no puede ser nulo ni estar vacío")
     private String nombreRol;
 
-    @Column(name = "descripcionRol", length = 255)
+    @NotBlank(message = "La descripción del rol no puede ser nula ni estar vacía")
     private String descripcionRol;
-
-    public Rol() {
-    }
-
-    public Rol(Long idRol, String nombreRol, String descripcionRol) {
-        this.idRol = idRol;
-        this.nombreRol = nombreRol;
-        this.descripcionRol = descripcionRol;
-    }
 
     public Long getIdRol() {
         return idRol;

@@ -1,28 +1,10 @@
-package pe.edu.upc.demosi.entities;
-import jakarta.persistence.*;
+package pe.edu.upc.demosi.dtos;
 
+public class EstadoReporteDTOList {
 
-@Entity
-@Table(name = "Estado_Reporte")
-public class EstadoReporte {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstadoReporte;
-
-    @Column(name = "nombreEReporte", length = 50, nullable = false)
     private String nombreEReporte;
-
-    @Column(name = "descripcionEReporte", length = 255)
     private String descripcionEReporte;
-
-    public EstadoReporte() {
-    }
-
-    public EstadoReporte(Long idEstadoReporte, String nombreEReporte, String descripcionEReporte) {
-        this.idEstadoReporte = idEstadoReporte;
-        this.nombreEReporte = nombreEReporte;
-        this.descripcionEReporte = descripcionEReporte;
-    }
 
     public Long getIdEstadoReporte() {
         return idEstadoReporte;

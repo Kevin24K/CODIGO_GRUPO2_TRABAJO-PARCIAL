@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upc.demosi.entities.Categoria;
 
 @Repository
-public interface ICategoriaRepository extends JpaRepository<Categoria, Long> {}
+public interface ICategoriaRepository extends JpaRepository<Categoria, Long> {
+}
