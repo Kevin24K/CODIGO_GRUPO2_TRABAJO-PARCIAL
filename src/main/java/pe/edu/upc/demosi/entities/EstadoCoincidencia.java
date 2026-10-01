@@ -1,7 +1,6 @@
 package pe.edu.upc.demosi.entities;
 import jakarta.persistence.*;
 
-import java.util.List;
 
 @Entity
 @Table(name = "EstadoCoincidencia")
@@ -10,23 +9,19 @@ public class EstadoCoincidencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstadoCoincidencia;
 
-    @Column(name = "nombreEstadoCoincidencia", length = 50, nullable = false)
-    private String nombreEstadoCoincidencia;
+    @Column(name = "nombre_estado_coincidencia", length = 50, nullable = false)
+    private String nombreEC;
 
     @Column(name = "descripcionEstadoCoincidencia", length = 255)
-    private String descripcionEstadoCoincidencia;
-
-    @OneToMany(mappedBy = "estadoCoincidencia")
-    private List<Coincidencia> coincidencias;
+    private String descripcionEC;
 
     public EstadoCoincidencia() {
     }
 
-    public EstadoCoincidencia(Long idEstadoCoincidencia, String nombreEstadoCoincidencia, String descripcionEstadoCoincidencia, List<Coincidencia> coincidencias) {
+    public EstadoCoincidencia(Long idEstadoCoincidencia, String nombreEC, String descripcionEC) {
         this.idEstadoCoincidencia = idEstadoCoincidencia;
-        this.nombreEstadoCoincidencia = nombreEstadoCoincidencia;
-        this.descripcionEstadoCoincidencia = descripcionEstadoCoincidencia;
-        this.coincidencias = coincidencias;
+        this.nombreEC = nombreEC;
+        this.descripcionEC = descripcionEC;
     }
 
     public Long getIdEstadoCoincidencia() {
@@ -37,27 +32,19 @@ public class EstadoCoincidencia {
         this.idEstadoCoincidencia = idEstadoCoincidencia;
     }
 
-    public String getNombreEstadoCoincidencia() {
-        return nombreEstadoCoincidencia;
+    public String getNombreEC() {
+        return nombreEC;
     }
 
-    public void setNombreEstadoCoincidencia(String nombreEstadoCoincidencia) {
-        this.nombreEstadoCoincidencia = nombreEstadoCoincidencia;
+    public void setNombreEC(String nombreEC) {
+        this.nombreEC = nombreEC;
     }
 
-    public String getDescripcionEstadoCoincidencia() {
-        return descripcionEstadoCoincidencia;
+    public String getDescripcionEC() {
+        return descripcionEC;
     }
 
-    public void setDescripcionEstadoCoincidencia(String descripcionEstadoCoincidencia) {
-        this.descripcionEstadoCoincidencia = descripcionEstadoCoincidencia;
-    }
-
-    public List<Coincidencia> getCoincidencias() {
-        return coincidencias;
-    }
-
-    public void setCoincidencias(List<Coincidencia> coincidencias) {
-        this.coincidencias = coincidencias;
+    public void setDescripcionEC(String descripcionEC) {
+        this.descripcionEC = descripcionEC;
     }
 }

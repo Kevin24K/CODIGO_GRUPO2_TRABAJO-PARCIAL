@@ -1,8 +1,6 @@
 package pe.edu.upc.demosi.entities;
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "Objeto")
 public class Objeto {
@@ -10,7 +8,7 @@ public class Objeto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idObjeto;
 
-    @Column(name = "nombreObjeto", length = 100, nullable = false)
+    @Column(name = "nombre_objeto", length = 100, nullable = false)
     private String nombreObjeto;
 
     @Column(name = "descripcionObjeto", columnDefinition = "TEXT")
@@ -23,7 +21,7 @@ public class Objeto {
     private String marcaObjeto;
 
     @Column(name = "activoObjeto", nullable = false)
-    private boolean activoObjeto;
+    private Boolean activoObjeto;
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
@@ -32,7 +30,7 @@ public class Objeto {
     public Objeto() {
     }
 
-    public Objeto(Long idObjeto, String nombreObjeto, String descripcionObjeto, String colorObjeto, String marcaObjeto, boolean activoObjeto, Categoria categoria) {
+    public Objeto(Long idObjeto, String nombreObjeto, String descripcionObjeto, String colorObjeto, String marcaObjeto, Boolean activoObjeto, Categoria categoria) {
         this.idObjeto = idObjeto;
 
         this.nombreObjeto = nombreObjeto;
@@ -83,11 +81,11 @@ public class Objeto {
         this.marcaObjeto = marcaObjeto;
     }
 
-    public boolean isActivoObjeto() {
+    public Boolean isActivoObjeto() {
         return activoObjeto;
     }
 
-    public void setActivoObjeto(boolean activoObjeto) {
+    public void setActivoObjeto(Boolean activoObjeto) {
         this.activoObjeto = activoObjeto;
     }
 

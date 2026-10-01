@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public class CoincidenciaDTCinsert {
 
-    private long idCoincidencia;
+    private Long idCoincidencia;
 
     @NotNull(message = "El ID del reporte perdido es obligatorio")
     private Long idReportePerdido;
@@ -19,19 +19,19 @@ public class CoincidenciaDTCinsert {
     private Long idEstadoCoincidencia;
 
     @NotNull(message = "El porcentaje de similitud es obligatorio")
-    private Double porcentajeSimilitud;
+    private Double porcentajeSimilitudC;
 
     @NotBlank(message = "El detalle de la coincidencia es obligatorio")
-    private String detalleCoincidencia;
+    private String detalleC;
 
     @NotNull(message = "La fecha de generación es obligatoria")
-    private LocalDateTime fechaGeneracionCoincidencia;
+    private LocalDateTime fechaGeneracionC;
 
-    public long getIdCoincidencia() {
+    public Long getIdCoincidencia() {
         return idCoincidencia;
     }
 
-    public void setIdCoincidencia(long idCoincidencia) {
+    public void setIdCoincidencia(Long idCoincidencia) {
         this.idCoincidencia = idCoincidencia;
     }
 
@@ -59,27 +59,27 @@ public class CoincidenciaDTCinsert {
         this.idEstadoCoincidencia = idEstadoCoincidencia;
     }
 
-    public Double getPorcentajeSimilitud() {
-        return porcentajeSimilitud;
+    public Double getPorcentajeSimilitudC() {
+        return porcentajeSimilitudC;
     }
 
-    public void setPorcentajeSimilitud(Double porcentajeSimilitud) {
-        this.porcentajeSimilitud = porcentajeSimilitud;
+    public void setPorcentajeSimilitudC(Double porcentajeSimilitudC) {
+        this.porcentajeSimilitudC = porcentajeSimilitudC;
     }
 
-    public String getDetalleCoincidencia() {
-        return detalleCoincidencia;
+    public String getDetalleC() {
+        return detalleC;
     }
 
-    public void setDetalleCoincidencia(String detalleCoincidencia) {
-        this.detalleCoincidencia = detalleCoincidencia;
+    public void setDetalleC(String detalleC) {
+        this.detalleC = detalleC;
     }
 
-    public LocalDateTime getFechaGeneracionCoincidencia() {
-        return fechaGeneracionCoincidencia;
+    public LocalDateTime getFechaGeneracionC() {
+        return fechaGeneracionC;
     }
 
-    public void setFechaGeneracionCoincidencia(LocalDateTime fechaGeneracionCoincidencia) {
-        this.fechaGeneracionCoincidencia = fechaGeneracionCoincidencia;
+    public void setFechaGeneracionC(LocalDateTime fechaGeneracionC) {
+        this.fechaGeneracionC = fechaGeneracionC;
     }
 }

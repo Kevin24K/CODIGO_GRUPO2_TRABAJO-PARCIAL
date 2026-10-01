@@ -14,7 +14,7 @@ public class CategoriaDTCinsert {
     private String descripcionCategoria;
 
     @NotNull(message = "El estado de la categoría es obligatorio")
-    private boolean activoCategoria;
+    private Boolean activoCategoria;
 
     public Long getIdCategoria() {
         return idCategoria;
@@ -40,11 +40,11 @@ public class CategoriaDTCinsert {
         this.descripcionCategoria = descripcionCategoria;
     }
 
-    public boolean isActivoCategoria() {
+    public Boolean getActivoCategoria() {
         return activoCategoria;
     }
 
-    public void setActivoCategoria(boolean activoCategoria) {
+    public void setActivoCategoria(Boolean activoCategoria) {
         this.activoCategoria = activoCategoria;
     }
 }

@@ -1,13 +1,16 @@
 package pe.edu.upc.demosi.dtos;
 
+import pe.edu.upc.demosi.entities.Categoria;
+
 public class ObjetoDTCList {
+
     private Long idObjeto;
-    private Long idCategoria;
     private String nombreObjeto;
     private String descripcionObjeto;
     private String colorObjeto;
     private String marcaObjeto;
-    private boolean activoObjeto;
+    private Boolean activoObjeto;
+    private Categoria categoria;
 
     public Long getIdObjeto() {
         return idObjeto;
@@ -15,14 +18,6 @@ public class ObjetoDTCList {
 
     public void setIdObjeto(Long idObjeto) {
         this.idObjeto = idObjeto;
-    }
-
-    public Long getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Long idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     public String getNombreObjeto() {
@@ -57,11 +52,19 @@ public class ObjetoDTCList {
         this.marcaObjeto = marcaObjeto;
     }
 
-    public boolean isActivoObjeto() {
+    public Boolean getActivoObjeto() {
         return activoObjeto;
     }
 
-    public void setActivoObjeto(boolean activoObjeto) {
+    public void setActivoObjeto(Boolean activoObjeto) {
         this.activoObjeto = activoObjeto;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

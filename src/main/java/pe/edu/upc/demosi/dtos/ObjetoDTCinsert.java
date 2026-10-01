@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class ObjetoDTCinsert {
-    private Long idobjeto;
+    private Long idObjeto;
 
     @NotBlank(message = "El nombre del objeto no puede ser nulo ni estar vacío")
     private String nombreObjeto;
@@ -18,18 +18,18 @@ public class ObjetoDTCinsert {
     @NotBlank(message = "La marca del objeto no puede ser nula ni estar vacía")
     private String marcaObjeto;
 
-    @NotBlank(message = "El estado del objeto no puede ser nulo ni estar vacío")
-    private boolean activoObjeto;
+    @NotNull(message = "El estado del objeto no puede ser nulo ni estar vacío")
+    private Boolean activoObjeto;
 
     @NotNull(message = "El Id de la Categoría es obligatorio.")
     private Long idCategoria;
 
-    public Long getIdobjeto() {
-        return idobjeto;
+    public Long getIdObjeto() {
+        return idObjeto;
     }
 
-    public void setIdobjeto(Long idobjeto) {
-        this.idobjeto = idobjeto;
+    public void setIdObjeto(Long idObjeto) {
+        this.idObjeto = idObjeto;
     }
 
     public String getNombreObjeto() {
@@ -64,11 +64,11 @@ public class ObjetoDTCinsert {
         this.marcaObjeto = marcaObjeto;
     }
 
-    public boolean isActivoObjeto() {
+    public Boolean getActivoObjeto() {
         return activoObjeto;
     }
 
-    public void setActivoObjeto(boolean activoObjeto) {
+    public void setActivoObjeto(Boolean activoObjeto) {
         this.activoObjeto = activoObjeto;
     }
 

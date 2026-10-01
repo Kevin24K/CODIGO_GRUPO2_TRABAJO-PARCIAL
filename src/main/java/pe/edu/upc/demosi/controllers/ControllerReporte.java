@@ -7,20 +7,34 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pe.edu.upc.demosi.dtos.ReporteDTCList;
 import pe.edu.upc.demosi.dtos.ReporteDTCinsert;
+import pe.edu.upc.demosi.entities.EstadoReporte;
+import pe.edu.upc.demosi.entities.Objeto;
 import pe.edu.upc.demosi.entities.Reporte;
+import pe.edu.upc.demosi.entities.Usuarios;
+import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
+import pe.edu.upc.demosi.servicesinterfaces.IEstadoReporteService;
+import pe.edu.upc.demosi.servicesinterfaces.IObjetoService;
 import pe.edu.upc.demosi.servicesinterfaces.IReporteService;
+import pe.edu.upc.demosi.servicesinterfaces.IUsuarioService;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/Reportes")
 public class ControllerReporte {
     private final IReporteService rS;
+    private final IUsuarioService uS;
+    private final IEstadoReporteService eR;
+    private final IObjetoService oS;
     private final ModelMapper modelMapper;
 
-    public ControllerReporte(IReporteService rS, ModelMapper modelMapper) {
+    public ControllerReporte(IReporteService rS, ModelMapper modelMapper,IEstadoReporteService eR, IObjetoService oS, IUsuarioService uS) {
         this.rS = rS;
+        this.uS = uS;
+        this.eR= eR;
+        this.oS= oS;
         this.modelMapper = modelMapper;
     }
 
@@ -40,18 +54,37 @@ public class ControllerReporte {
     @PostMapping
     public ResponseEntity<ReporteDTCinsert> registrar(
             @Valid @RequestBody ReporteDTCinsert dto) {
+        // 1. Validamos las 3 dependencias (Lanzando 400 Bad Request si alguna falla)
+        Usuarios usuario = uS.listId(dto.getIdUsuario())
+                .orElseThrow(() -> new ResourceNotFoundException("No existe el usuario con id: " + dto.getIdUsuario()));
 
-        Reporte reporte = modelMapper.map(dto, Reporte.class);
+        Objeto objeto = oS.listId(dto.getIdObjeto())
+                .orElseThrow(() -> new ResourceNotFoundException("No existe el objeto con id: " + dto.getIdObjeto()));
 
-        rS.insert(reporte);
+        EstadoReporte estado = eR.listId(dto.getIdEstadoReporte())
+                .orElseThrow(() -> new ResourceNotFoundException("No existe el estado de reporte con id: " + dto.getIdEstadoReporte()));
 
-        ReporteDTCinsert responseDTO =
-                modelMapper.map(reporte, ReporteDTCinsert.class);
+        // 2. Mapeamos y asignamos las 3 entidades validadas
+        Reporte repS = modelMapper.map(dto, Reporte.class);
+        repS.setUsuario(usuario);
+        repS.setObjeto(objeto);
+        repS.setEstadoReporte(estado);
 
+        // --- ALTERNATIVA A @PREPERSIST: Asignación manual de fechas ---
+        repS.setFechaCreacion(LocalDateTime.now());
+        repS.setFechaActualizacionR(LocalDateTime.now());
+
+        // 3. Guardamos
+        rS.insert(repS);
+
+        // 4. Mapeamos a la respuesta y le inyectamos los IDs
+        ReporteDTCinsert responseDTO = modelMapper.map(repS, ReporteDTCinsert.class);
+
+        // 5. Devolvemos el 201 Created
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(reporte.getIdReporte())
+                .buildAndExpand(repS.getIdReporte())
                 .toUri();
 
         return ResponseEntity

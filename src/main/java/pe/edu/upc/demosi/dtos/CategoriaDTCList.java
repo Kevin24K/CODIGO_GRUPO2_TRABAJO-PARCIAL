@@ -4,7 +4,7 @@ public class CategoriaDTCList {
     private Long idCategoria;
     private String nombreCategoria;
     private String descripcionCategoria;
-    private boolean activoCategoria;
+    private Boolean activoCategoria;
 
     public Long getIdCategoria() {
         return idCategoria;
@@ -30,11 +30,11 @@ public class CategoriaDTCList {
         this.descripcionCategoria = descripcionCategoria;
     }
 
-    public boolean isActivoCategoria() {
+    public Boolean isActivoCategoria() {
         return activoCategoria;
     }
 
-    public void setActivoCategoria(boolean activoCategoria) {
+    public void setActivoCategoria(Boolean activoCategoria) {
         this.activoCategoria = activoCategoria;
     }
 }

@@ -1,36 +1,32 @@
 package pe.edu.upc.demosi.dtos;
 
-import jakarta.validation.constraints.NotBlank;
-
-import java.time.LocalDateTime;
-
 public class EstadoCoincidenciaDTOList {
 
-    private long idEstadoCoincidencia;
-    private String nombre;
-    private String descripcion;
+    private Long idEstadoCoincidencia;
+    private String nombreEC;
+    private String descripcionEC;
 
-    public long getIdEstadoCoincidencia() {
+    public Long getIdEstadoCoincidencia() {
         return idEstadoCoincidencia;
     }
 
-    public void setIdEstadoCoincidencia(long idEstadoCoincidencia) {
+    public void setIdEstadoCoincidencia(Long idEstadoCoincidencia) {
         this.idEstadoCoincidencia = idEstadoCoincidencia;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreEC() {
+        return nombreEC;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreEC(String nombreEC) {
+        this.nombreEC = nombreEC;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripcionEC() {
+        return descripcionEC;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcionEC(String descripcionEC) {
+        this.descripcionEC = descripcionEC;
     }
 }

@@ -6,6 +6,7 @@ import pe.edu.upc.demosi.servicesinterfaces.IUsuarioService;
 import pe.edu.upc.demosi.repositories.IUsuarioRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServicesImplement implements IUsuarioService {
@@ -27,7 +28,7 @@ public class UsuarioServicesImplement implements IUsuarioService {
     }
 
     @Override
-    public Usuarios findById(long id) {
+    public Optional<Usuarios> listId(Long id) {
         return uR.findById(id);
     }
 }

@@ -40,7 +40,6 @@ public class ControllerCategoria {
     @PostMapping
     public ResponseEntity<CategoriaDTCinsert> registrar(
             @Valid @RequestBody CategoriaDTCinsert dto) {
-
         Categoria categoria = modelMapper.map(dto, Categoria.class);
 
         cS.insert(categoria);
