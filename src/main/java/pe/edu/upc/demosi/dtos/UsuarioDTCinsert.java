@@ -1,96 +1,44 @@
 package pe.edu.upc.demosi.dtos;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
-import java.time.LocalDateTime;
+import jakarta.validation.constraints.Size;
 
 public class UsuarioDTCinsert {
 
-    private Long idUsuario;
+    @NotBlank(message = "El nombre no puede ser nulo ni estar vacío")
+    @Size(max = 50, message = "El nombre no puede superar los 50 caracteres")
+    private String nombre;
 
-    @NotBlank(message = "El nombre del usuario no puede ser nulo ni estar vacío")
-    private String nameUsuario;
+    @NotBlank(message = "El apellido no puede ser nulo ni estar vacío")
+    @Size(max = 50, message = "El apellido no puede superar los 50 caracteres")
+    private String apellido;
 
-    @NotBlank(message = "El apellido del usuario no puede ser nulo ni estar vacío")
-    private String apellidoUsuario;
+    @NotBlank(message = "El correo no puede ser nulo ni estar vacío")
+    @Email(message = "El correo no tiene un formato válido")
+    @Size(max = 100, message = "El correo no puede superar los 100 caracteres")
+    private String correo;
 
-    @NotBlank(message = "El correo del usuario no puede ser nulo ni estar vacío")
-    private String correoUsuario;
-
-    @NotBlank(message = "La contraseña del usuario no puede ser nulo ni estar vacío")
-    private String ucontrasenaHash;
-
-    @NotNull(message = "El rol del usuario no puede ser nulo ni estar vacío")
-    private LocalDateTime fechaRegistroUsuario;
-
-    @NotNull(message = "El estado del usuario es obligatorio")
-    private Boolean activoUsuarios;
+    @NotBlank(message = "La contraseña no puede ser nula ni estar vacía")
+    @Size(min = 8, max = 100, message = "La contraseña debe tener entre 8 y 100 caracteres")
+    private String contrasena;
 
     @NotNull(message = "El Id del Rol es obligatorio.")
     private Long idRol;
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+    public String getApellido() { return apellido; }
+    public void setApellido(String apellido) { this.apellido = apellido; }
 
-    public String getNameUsuario() {
-        return nameUsuario;
-    }
+    public String getCorreo() { return correo; }
+    public void setCorreo(String correo) { this.correo = correo; }
 
-    public void setNameUsuario(String nameUsuario) {
-        this.nameUsuario = nameUsuario;
-    }
+    public String getContrasena() { return contrasena; }
+    public void setContrasena(String contrasena) { this.contrasena = contrasena; }
 
-    public String getApellidoUsuario() {
-        return apellidoUsuario;
-    }
-
-    public void setApellidoUsuario(String apellidoUsuario) {
-        this.apellidoUsuario = apellidoUsuario;
-    }
-
-    public String getCorreoUsuario() {
-        return correoUsuario;
-    }
-
-    public void setCorreoUsuario(String correoUsuario) {
-        this.correoUsuario = correoUsuario;
-    }
-
-    public String getUcontrasenaHash() {
-        return ucontrasenaHash;
-    }
-
-    public void setUcontrasenaHash(String ucontrasenaHash) {
-        this.ucontrasenaHash = ucontrasenaHash;
-    }
-
-    public LocalDateTime getFechaRegistroUsuario() {
-        return fechaRegistroUsuario;
-    }
-
-    public void setFechaRegistroUsuario(LocalDateTime fechaRegistroUsuario) {
-        this.fechaRegistroUsuario = fechaRegistroUsuario;
-    }
-
-    public Boolean getActivoUsuarios() {
-        return activoUsuarios;
-    }
-
-    public void setActivoUsuarios(Boolean activoUsuarios) {
-        this.activoUsuarios = activoUsuarios;
-    }
-
-    public Long getIdRol() {
-        return idRol;
-    }
-
-    public void setIdRol(Long idRol) {
-        this.idRol = idRol;
-    }
+    public Long getIdRol() { return idRol; }
+    public void setIdRol(Long idRol) { this.idRol = idRol; }
 }
