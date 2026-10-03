@@ -2,6 +2,7 @@ package pe.edu.upc.demosi.controllers;
 
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -69,5 +70,19 @@ public class ControllerObjeto {
         return ResponseEntity
                 .created(location)
                 .body(responseDTO);
+    }
+
+    // HU48: Responder HTTP 200 OK con la lista filtrada de objetos activos
+    @GetMapping("/activos")
+    public ResponseEntity<List<Objeto>> listActivos() {
+        List<Objeto> lista = oS.listActivos();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
+
+    // HU49: Retornar los arreglos de objetos con categoría con HTTP 200 OK
+    @GetMapping("/con-categoria")
+    public ResponseEntity<List<Object[]>> listConCategoria() {
+        List<Object[]> lista = oS.listConCategoria();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 }

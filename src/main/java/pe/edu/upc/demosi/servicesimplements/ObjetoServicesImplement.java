@@ -37,6 +37,16 @@ public class ObjetoServicesImplement implements IObjetoService {
     }
 
     @Override
+    public List<Objeto> listActivos() {
+        return oR.findObjetosActivos();
+    }
+
+    @Override
+    public List<Object[]> listConCategoria() {
+        return oR.findObjetosConCategoria();
+    }
+
+    @Override
     public List<Objeto> listarPorCategoria(long idCategoria) {
         return oR.findByCategoria_IdCategoria(idCategoria);
     }

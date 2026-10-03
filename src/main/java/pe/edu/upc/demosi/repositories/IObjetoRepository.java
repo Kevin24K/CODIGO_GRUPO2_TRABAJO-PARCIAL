@@ -9,13 +9,14 @@ import java.util.List;
 
 @Repository
 public interface IObjetoRepository extends JpaRepository<Objeto, Long> {
-    // HU48: Listar objetos activos (JPQL)
+    List<Objeto> findByCategoria_IdCategoria(Long idCategoria);
+
+    // HU48: Consulta JPQL para buscar objetos en estado activo
     @Query("SELECT o FROM Objeto o WHERE o.activo = true")
     List<Objeto> findObjetosActivos();
 
-    // HU49: Listar objetos con su categoría (Nativo SQL)
-    @Query(value = "SELECT o.id_objeto, o.nombre, o.descripcion, c.nombre AS categoria " +
-            "FROM objeto o JOIN categoria c ON o.id_categoria = c.id_categoria",
-            nativeQuery = true)
+    // HU49: Consulta nativa JOIN entre Objeto y Categoría
+    @Query(value = "SELECT o.id_objeto, o.nombre, o.descripcion, c.nombre_categoria " +
+            "FROM objetos o INNER JOIN categorias c ON o.id_categoria = c.id_categoria", nativeQuery = true)
     List<Object[]> findObjetosConCategoria();
 }

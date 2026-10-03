@@ -10,7 +10,7 @@ import pe.edu.upc.demosi.dtos.ReporteDTCinsert;
 import pe.edu.upc.demosi.entities.EstadoReporte;
 import pe.edu.upc.demosi.entities.Objeto;
 import pe.edu.upc.demosi.entities.Reporte;
-import pe.edu.upc.demosi.entities.Usuarios;
+import pe.edu.upc.demosi.entities.Usuario;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.servicesinterfaces.IEstadoReporteService;
 import pe.edu.upc.demosi.servicesinterfaces.IObjetoService;
@@ -30,11 +30,11 @@ public class ControllerReporte {
     private final IObjetoService oS;
     private final ModelMapper modelMapper;
 
-    public ControllerReporte(IReporteService rS, ModelMapper modelMapper,IEstadoReporteService eR, IObjetoService oS, IUsuarioService uS) {
+    public ControllerReporte(IReporteService rS, ModelMapper modelMapper, IEstadoReporteService eR, IObjetoService oS, IUsuarioService uS) {
         this.rS = rS;
         this.uS = uS;
-        this.eR= eR;
-        this.oS= oS;
+        this.eR = eR;
+        this.oS = oS;
         this.modelMapper = modelMapper;
     }
 
@@ -54,8 +54,8 @@ public class ControllerReporte {
     @PostMapping
     public ResponseEntity<ReporteDTCinsert> registrar(
             @Valid @RequestBody ReporteDTCinsert dto) {
-        // 1. Validamos las 3 dependencias (Lanzando 400 Bad Request si alguna falla)
-        Usuarios usuario = uS.listId(dto.getIdUsuario())
+        // 1. Validamos las 3 dependencias (Lanzando 404 si alguna falla)
+        Usuario usuario = uS.listId(dto.getIdUsuario())
                 .orElseThrow(() -> new ResourceNotFoundException("No existe el usuario con id: " + dto.getIdUsuario()));
 
         Objeto objeto = oS.listId(dto.getIdObjeto())
