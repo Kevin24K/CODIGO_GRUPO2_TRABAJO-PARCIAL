@@ -46,4 +46,8 @@ public class ReporteServicesImplement implements IReporteService {
     public List<Reporte> listarPorEstado(long idEstadoReporte) {
         return rR.findByEstadoReporte_IdEstadoReporte(idEstadoReporte);
     }
+    @Override
+    public List<Reporte> listActivos() {
+        return rR.findReportesActivos(); // Asegúrate de que rR sea tu IReporteRepository inyectado
+    }
 }
