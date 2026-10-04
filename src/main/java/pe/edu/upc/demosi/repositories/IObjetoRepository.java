@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface IObjetoRepository extends JpaRepository<Objeto, Long> {
     List<Objeto> findByCategoria_IdCategoria(Long idCategoria);
+    List<Objeto> findByActivoObjetoTrue();
 }

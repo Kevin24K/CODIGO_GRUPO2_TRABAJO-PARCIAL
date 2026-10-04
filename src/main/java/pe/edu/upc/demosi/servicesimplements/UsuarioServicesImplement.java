@@ -26,6 +26,11 @@ public class UsuarioServicesImplement implements IUsuarioService, UserDetailsSer
     }
 
     @Override
+    public List<Usuario> listarActivos() {
+        return uR.findByActivoTrue();
+    }
+
+    @Override
     public void insert(Usuario usuario) {
         uR.save(usuario);
     }

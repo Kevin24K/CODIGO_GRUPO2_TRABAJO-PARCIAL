@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pe.edu.upc.demosi.dtos.UsuarioDTCList;
 import pe.edu.upc.demosi.dtos.UsuarioDTCinsert;
+import pe.edu.upc.demosi.dtos.UsuarioActivoDTCList;
 import pe.edu.upc.demosi.entities.Rol;
 import pe.edu.upc.demosi.entities.Usuario;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
@@ -68,6 +69,36 @@ public class ControllerUsuario {
                 .toUri();
 
         return ResponseEntity.created(location).body(toListDTO(usuario));
+    }
+
+    // HU46: listar usuarios activos
+    @GetMapping("/activos")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<UsuarioActivoDTCList>> listarActivos() {
+        List<UsuarioActivoDTCList> lista = uS.listarActivos()
+                .stream()
+                .map(u -> {
+                    UsuarioActivoDTCList dto = new UsuarioActivoDTCList();
+                    dto.setIdUsuario(u.getIdUsuario());
+                    dto.setNombre(u.getNombre());
+                    dto.setApellido(u.getApellido());
+                    dto.setCorreo(u.getCorreo());
+                    dto.setFechaRegistro(u.getFechaRegistro());
+                    return dto;
+                })
+                .toList();
+        return ResponseEntity.ok(lista);
+    }
+
+    // HU47: listar usuarios activos con su rol
+    @GetMapping("/activos-con-rol")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<UsuarioDTCList>> listarActivosConRol() {
+        List<UsuarioDTCList> lista = uS.listarActivos()
+                .stream()
+                .map(this::toListDTO)
+                .toList();
+        return ResponseEntity.ok(lista);
     }
 
     private UsuarioDTCList toListDTO(Usuario u) {

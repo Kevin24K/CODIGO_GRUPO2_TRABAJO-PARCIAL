@@ -22,6 +22,11 @@ public class ObjetoServicesImplement implements IObjetoService {
     }
 
     @Override
+    public List<Objeto> listarActivos() {
+        return oR.findByActivoObjetoTrue();
+    }
+
+    @Override
     public void insert(Objeto objeto) {
         oR.save(objeto);
     }

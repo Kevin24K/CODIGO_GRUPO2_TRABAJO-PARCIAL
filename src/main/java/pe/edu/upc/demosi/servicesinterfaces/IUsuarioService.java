@@ -9,4 +9,5 @@ public interface IUsuarioService {
     void insert(Usuario usuario);
     List<Usuario> list();
     Optional<Usuario> listId(Long id);
+    List<Usuario> listarActivos();
 }
