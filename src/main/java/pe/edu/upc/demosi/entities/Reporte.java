@@ -29,7 +29,7 @@ public class Reporte {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuarios usuario;
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_objeto", nullable = false)
@@ -49,7 +49,7 @@ public class Reporte {
     public Reporte() {
     }
 
-    public Reporte(Long idReporte, String tipoReporte, LocalDate fechaeventoR, LocalTime horaEventoR, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacionR, Usuarios usuario, Objeto objeto, EstadoReporte estadoReporte, List<Coincidencia> coincidenciasComoPerdido, List<Coincidencia> coincidenciasComoEncontrado) {
+    public Reporte(Long idReporte, String tipoReporte, LocalDate fechaeventoR, LocalTime horaEventoR, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacionR, Usuario usuario, Objeto objeto, EstadoReporte estadoReporte, List<Coincidencia> coincidenciasComoPerdido, List<Coincidencia> coincidenciasComoEncontrado) {
         this.idReporte = idReporte;
         this.tipoReporte = tipoReporte;
         this.fechaeventoR = fechaeventoR;
@@ -111,11 +111,11 @@ public class Reporte {
         this.fechaActualizacionR = fechaActualizacionR;
     }
 
-    public Usuarios getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuarios usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

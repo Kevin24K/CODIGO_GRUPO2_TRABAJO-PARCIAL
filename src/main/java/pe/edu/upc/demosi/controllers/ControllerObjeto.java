@@ -8,6 +8,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.dtos.ObjetoDTCinsert;
 import pe.edu.upc.demosi.dtos.ObjetoDTCList;
+import pe.edu.upc.demosi.dtos.ObjetoCategoriaDTCList;
 import pe.edu.upc.demosi.entities.Categoria;
 import pe.edu.upc.demosi.entities.Objeto;
 import pe.edu.upc.demosi.servicesinterfaces.ICategoriaService;
@@ -40,6 +41,37 @@ public class ControllerObjeto {
 
         return ResponseEntity.ok(lista);
     }
+
+    // HU48: listar objetos activos
+    @GetMapping("/activos")
+    public ResponseEntity<List<ObjetoDTCList>> listarActivos() {
+        List<ObjetoDTCList> lista = oS.listarActivos()
+                .stream()
+                .map(objeto -> modelMapper.map(objeto, ObjetoDTCList.class))
+                .toList();
+        return ResponseEntity.ok(lista);
+    }
+
+    // HU49: listar objetos con su categoría
+    @GetMapping("/con-categoria")
+    public ResponseEntity<List<ObjetoCategoriaDTCList>> listarConCategoria() {
+        List<ObjetoCategoriaDTCList> lista = oS.list()
+                .stream()
+                .map(o -> {
+                    ObjetoCategoriaDTCList dto = new ObjetoCategoriaDTCList();
+                    dto.setIdObjeto(o.getIdObjeto());
+                    dto.setNombreObjeto(o.getNombreObjeto());
+                    dto.setDescripcionObjeto(o.getDescripcionObjeto());
+                    dto.setColorObjeto(o.getColorObjeto());
+                    dto.setMarcaObjeto(o.getMarcaObjeto());
+                    dto.setIdCategoria(o.getCategoria().getIdCategoria());
+                    dto.setNombreCategoria(o.getCategoria().getNombreCategoria());
+                    return dto;
+                })
+                .toList();
+        return ResponseEntity.ok(lista);
+    }
+
     @PostMapping
     public ResponseEntity<ObjetoDTCinsert> registrar(
             @Valid @RequestBody ObjetoDTCinsert dto) {

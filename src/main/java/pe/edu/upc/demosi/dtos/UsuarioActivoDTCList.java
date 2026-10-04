@@ -2,15 +2,12 @@ package pe.edu.upc.demosi.dtos;
 
 import java.time.LocalDateTime;
 
-public class UsuarioDTCList {
+public class UsuarioActivoDTCList {
     private Long idUsuario;
     private String nombre;
     private String apellido;
     private String correo;
     private LocalDateTime fechaRegistro;
-    private boolean activo;
-    private Long idRol;
-    private String nombreRol;
 
     public Long getIdUsuario() { return idUsuario; }
     public void setIdUsuario(Long idUsuario) { this.idUsuario = idUsuario; }
@@ -26,13 +23,4 @@ public class UsuarioDTCList {
 
     public LocalDateTime getFechaRegistro() { return fechaRegistro; }
     public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
-
-    public boolean isActivo() { return activo; }
-    public void setActivo(boolean activo) { this.activo = activo; }
-
-    public Long getIdRol() { return idRol; }
-    public void setIdRol(Long idRol) { this.idRol = idRol; }
-
-    public String getNombreRol() { return nombreRol; }
-    public void setNombreRol(String nombreRol) { this.nombreRol = nombreRol; }
 }

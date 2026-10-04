@@ -12,4 +12,5 @@ public interface IObjetoService {
     void delete(long id);
     List<Objeto> listarPorCategoria(long idCategoria);
     public Optional<Objeto> listId(Long id);
+    List<Objeto> listarActivos();
 }
