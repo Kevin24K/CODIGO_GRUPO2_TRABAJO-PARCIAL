@@ -91,4 +91,9 @@ public class ControllerReporte {
                 .created(location)
                 .body(responseDTO);
     }
+    @GetMapping("/activos")
+    public ResponseEntity<List<Reporte>> listarActivos() {
+        List<Reporte> lista = rS.listActivos(); // rS es tu IReporteService
+        return ResponseEntity.ok(lista); // CA02: Responder con HTTP 200 OK
+    }
 }

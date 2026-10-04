@@ -55,4 +55,9 @@ public class ControllerEstadoCoincidencia {
                 .created(location)
                 .body(responseDTO);
     }
+    @GetMapping("/pendientes")
+    public ResponseEntity<List<EstadoCoincidencia>> listarPendientes() {
+        List<EstadoCoincidencia> lista = eR.listPendientes(); // eR es tu IEstadoCoincidenciaRepository
+        return ResponseEntity.ok(lista); // CA02: HTTP 200 OK
+    }
 }
