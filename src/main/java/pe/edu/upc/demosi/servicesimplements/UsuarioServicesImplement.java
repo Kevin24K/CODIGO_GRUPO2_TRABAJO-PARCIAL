@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import pe.edu.upc.demosi.entities.Usuario;
 import pe.edu.upc.demosi.repositories.IUsuarioRepository;
 import pe.edu.upc.demosi.servicesinterfaces.IUsuarioService;
+import pe.edu.upc.demosi.dtos.UsuarioDTCList;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +31,36 @@ public class UsuarioServicesImplement implements IUsuarioService, UserDetailsSer
 
     @Override
     public List<Usuario> listarActivos() {
-        return uR.findByActivoTrue();
+        return uR.listarActivos();
+    }
+
+    // HU47
+    @Override
+    public List<UsuarioDTCList> listarActivosConRol() {
+        List<UsuarioDTCList> lista = new ArrayList<>();
+        for (Object[] fila : uR.listarActivosConRolNative()) {
+            UsuarioDTCList dto = new UsuarioDTCList();
+            dto.setIdUsuario(((Number) fila[0]).longValue());
+            dto.setNombre((String) fila[1]);
+            dto.setApellido((String) fila[2]);
+            dto.setCorreo((String) fila[3]);
+            dto.setFechaRegistro(aLocalDateTime(fila[4]));
+            dto.setActivo(true);
+            dto.setIdRol(((Number) fila[5]).longValue());
+            dto.setNombreRol((String) fila[6]);
+            lista.add(dto);
+        }
+        return lista;
+    }
+
+    private LocalDateTime aLocalDateTime(Object valor) {
+        if (valor instanceof Timestamp) {
+            return ((Timestamp) valor).toLocalDateTime();
+        }
+        if (valor instanceof LocalDateTime) {
+            return (LocalDateTime) valor;
+        }
+        return null;
     }
 
     @Override

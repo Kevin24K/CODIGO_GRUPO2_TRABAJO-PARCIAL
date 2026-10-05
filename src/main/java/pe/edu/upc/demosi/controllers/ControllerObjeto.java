@@ -55,21 +55,7 @@ public class ControllerObjeto {
     // HU49: listar objetos con su categoría
     @GetMapping("/con-categoria")
     public ResponseEntity<List<ObjetoCategoriaDTCList>> listarConCategoria() {
-        List<ObjetoCategoriaDTCList> lista = oS.list()
-                .stream()
-                .map(o -> {
-                    ObjetoCategoriaDTCList dto = new ObjetoCategoriaDTCList();
-                    dto.setIdObjeto(o.getIdObjeto());
-                    dto.setNombreObjeto(o.getNombreObjeto());
-                    dto.setDescripcionObjeto(o.getDescripcionObjeto());
-                    dto.setColorObjeto(o.getColorObjeto());
-                    dto.setMarcaObjeto(o.getMarcaObjeto());
-                    dto.setIdCategoria(o.getCategoria().getIdCategoria());
-                    dto.setNombreCategoria(o.getCategoria().getNombreCategoria());
-                    return dto;
-                })
-                .toList();
-        return ResponseEntity.ok(lista);
+        return ResponseEntity.ok(oS.listarConCategoria());
     }
 
     @PostMapping

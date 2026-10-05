@@ -94,11 +94,7 @@ public class ControllerUsuario {
     @GetMapping("/activos-con-rol")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UsuarioDTCList>> listarActivosConRol() {
-        List<UsuarioDTCList> lista = uS.listarActivos()
-                .stream()
-                .map(this::toListDTO)
-                .toList();
-        return ResponseEntity.ok(lista);
+        return ResponseEntity.ok(uS.listarActivosConRol());
     }
 
     private UsuarioDTCList toListDTO(Usuario u) {

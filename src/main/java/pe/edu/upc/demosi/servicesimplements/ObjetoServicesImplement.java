@@ -4,6 +4,8 @@ import pe.edu.upc.demosi.entities.Objeto;
 
 import pe.edu.upc.demosi.repositories.IObjetoRepository;
 import pe.edu.upc.demosi.servicesinterfaces.IObjetoService;
+import pe.edu.upc.demosi.dtos.ObjetoCategoriaDTCList;
+import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +25,25 @@ public class ObjetoServicesImplement implements IObjetoService {
 
     @Override
     public List<Objeto> listarActivos() {
-        return oR.findByActivoObjetoTrue();
+        return oR.listarActivos();
+    }
+
+    // HU49
+    @Override
+    public List<ObjetoCategoriaDTCList> listarConCategoria() {
+        List<ObjetoCategoriaDTCList> lista = new ArrayList<>();
+        for (Object[] fila : oR.listarConCategoriaNative()) {
+            ObjetoCategoriaDTCList dto = new ObjetoCategoriaDTCList();
+            dto.setIdObjeto(((Number) fila[0]).longValue());
+            dto.setNombreObjeto((String) fila[1]);
+            dto.setDescripcionObjeto((String) fila[2]);
+            dto.setColorObjeto((String) fila[3]);
+            dto.setMarcaObjeto((String) fila[4]);
+            dto.setIdCategoria(((Number) fila[5]).longValue());
+            dto.setNombreCategoria((String) fila[6]);
+            lista.add(dto);
+        }
+        return lista;
     }
 
     @Override
