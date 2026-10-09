@@ -34,4 +34,5 @@ public class EstadoReporteServicesImplement implements IEstadoReporteService {
     public void delete(long id) {
         eR.deleteById(id);
     }
+
 }

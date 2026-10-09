@@ -1,6 +1,7 @@
 package pe.edu.upc.demosi.servicesimplements;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.demosi.entities.Coincidencia;
+import pe.edu.upc.demosi.entities.EstadoCoincidencia;
 import pe.edu.upc.demosi.repositories.ICoincidenciaRepository;
 import pe.edu.upc.demosi.servicesinterfaces.ICoincidenciaService;
 
@@ -35,4 +36,5 @@ public class CoincidenciaServicesImplement implements ICoincidenciaService {
     public void delete(long id) {
         cR.deleteById(id);
     }
+
 }
