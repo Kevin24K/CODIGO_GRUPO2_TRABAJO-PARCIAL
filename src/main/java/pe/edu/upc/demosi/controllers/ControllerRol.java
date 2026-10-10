@@ -55,4 +55,9 @@ public class ControllerRol {
                 .created(location)
                 .body(responseDTO);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        rS.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

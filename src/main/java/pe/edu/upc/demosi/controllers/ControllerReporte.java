@@ -96,4 +96,9 @@ public class ControllerReporte {
         List<Reporte> lista = rS.listActivos(); // rS es tu IReporteService
         return ResponseEntity.ok(lista); // CA02: Responder con HTTP 200 OK
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        rS.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

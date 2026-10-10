@@ -78,4 +78,10 @@ public class ControllerNotificacion {
                 .created(location)
                 .body(responseDTO);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        // Llama al método delete del servicio (nS)
+        nS.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

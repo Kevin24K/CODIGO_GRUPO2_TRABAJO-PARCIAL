@@ -88,4 +88,10 @@ public class ControllerObjeto {
                 .created(location)
                 .body(responseDTO);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        // Llama al método delete del servicio (oS)
+        oS.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

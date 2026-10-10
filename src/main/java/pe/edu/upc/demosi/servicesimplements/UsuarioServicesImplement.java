@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.demosi.entities.Usuario;
+import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.repositories.IUsuarioRepository;
 import pe.edu.upc.demosi.servicesinterfaces.IUsuarioService;
 import pe.edu.upc.demosi.dtos.UsuarioDTCList;
@@ -78,5 +79,13 @@ public class UsuarioServicesImplement implements IUsuarioService, UserDetailsSer
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
         return uR.findByCorreo(correo)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + correo));
+    }
+    @Override
+    public void delete(long id) {
+        Usuario usuario = listId(id).orElse(null);
+        if (usuario == null) {
+            throw new ResourceNotFoundException("No se encontró el usuario con el ID: " + id);
+        }
+        uR.delete(usuario);
     }
 }
