@@ -1,7 +1,9 @@
 package pe.edu.upc.demosi.servicesimplements;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.demosi.entities.Coincidencia;
 import pe.edu.upc.demosi.entities.Objeto;
 
+import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.repositories.IObjetoRepository;
 import pe.edu.upc.demosi.servicesinterfaces.IObjetoService;
 import pe.edu.upc.demosi.dtos.ObjetoCategoriaDTCList;
@@ -53,7 +55,11 @@ public class ObjetoServicesImplement implements IObjetoService {
 
     @Override
     public void delete(long id) {
-        oR.deleteById(id);
+        Objeto objeto = listId(id).orElse(null);
+        if (objeto == null) {
+            throw new ResourceNotFoundException("No se encontró el objeto con el ID: " + id);
+        }
+        oR.delete(objeto);
     }
 
     @Override

@@ -12,4 +12,5 @@ public interface IUsuarioService {
     Optional<Usuario> listId(Long id);
     List<Usuario> listarActivos();
     List<UsuarioDTCList> listarActivosConRol();
+    void delete(long id);
 }

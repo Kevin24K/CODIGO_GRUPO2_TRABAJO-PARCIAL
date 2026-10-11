@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pe.edu.upc.demosi.dtos.CategoriaDTCList;
 import pe.edu.upc.demosi.dtos.CategoriaDTCinsert;
+import pe.edu.upc.demosi.dtos.CategoriaDTODetail;
+import pe.edu.upc.demosi.dtos.CategoriaDTOUpdate;
 import pe.edu.upc.demosi.entities.Categoria;
 import pe.edu.upc.demosi.servicesinterfaces.ICategoriaService;
 
@@ -56,5 +58,25 @@ public class ControllerCategoria {
         return ResponseEntity
                 .created(location)
                 .body(responseDTO);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+
+        cS.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoriaDTODetail> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody CategoriaDTOUpdate dto) {
+
+        Categoria categoria = modelMapper.map(dto, Categoria.class);
+
+        cS.update(id, categoria);
+
+       CategoriaDTODetail responseDTO = modelMapper.map(cS.listId(id), CategoriaDTODetail.class);
+
+        return ResponseEntity.ok(responseDTO);
     }
 }

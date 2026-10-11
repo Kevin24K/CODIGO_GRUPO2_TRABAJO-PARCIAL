@@ -109,4 +109,10 @@ public class ControllerUsuario {
         dto.setNombreRol(u.getRol().getNombreRol());
         return dto;
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        // Llama al método delete del servicio (uS)
+        uS.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

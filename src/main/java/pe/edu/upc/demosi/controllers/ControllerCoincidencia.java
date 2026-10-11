@@ -70,5 +70,10 @@ public class ControllerCoincidencia {
                 .created(location)
                 .body(responseDTO);
     }
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        // Llama al método delete del servicio (cS)
+        cR.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
