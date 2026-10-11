@@ -2,6 +2,7 @@ package pe.edu.upc.demosi.servicesimplements;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.demosi.entities.Categoria;
 import pe.edu.upc.demosi.entities.Coincidencia;
+import pe.edu.upc.demosi.entities.Rol;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.repositories.ICoincidenciaRepository;
 import pe.edu.upc.demosi.servicesinterfaces.ICoincidenciaService;
@@ -34,11 +35,23 @@ public class CoincidenciaServicesImplement implements ICoincidenciaService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
+        cR.deleteById(id);
+    }
+
+    @Override
+    public void update(Long id, Coincidencia c) {
         Coincidencia coincidencia = listId(id).orElse(null);
-        if (coincidencia == null) {
+        if (coincidencia != null) {
+            coincidencia.setReportePerdido(c.getReportePerdido());
+            coincidencia.setReporteEncontrado(c.getReporteEncontrado());
+            coincidencia.setEstadoCoincidencia(c.getEstadoCoincidencia());
+            coincidencia.setPorcentajeSimilitudC(c.getPorcentajeSimilitudC());
+            coincidencia.setDetalleC(c.getDetalleC());
+
+            cR.save(coincidencia);
+        } else {
             throw new ResourceNotFoundException("No se encontró la coincidencia con el ID: " + id);
         }
-        cR.delete(coincidencia);
     }
 }

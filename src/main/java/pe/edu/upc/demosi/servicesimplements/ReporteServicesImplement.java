@@ -35,12 +35,8 @@ public class ReporteServicesImplement implements IReporteService {
     }
 
     @Override
-    public void delete(long id) {
-        Reporte reporte = listId(id).orElse(null);
-        if (reporte == null) {
-            throw new ResourceNotFoundException("No se encontró el reporte con el ID: " + id);
-        }
-        rR.delete(reporte);
+    public void delete(Long id) {
+        rR.deleteById(id);
     }
 
     @Override
@@ -55,5 +51,19 @@ public class ReporteServicesImplement implements IReporteService {
     @Override
     public List<Reporte> listActivos() {
         return rR.findReportesActivos(); // Asegúrate de que rR sea tu IReporteRepository inyectado
+    }
+
+    @Override
+    public void update(Long id, Reporte r) {
+        Reporte reporte = listId(id).orElse(null);
+        if (reporte != null) {
+            reporte.setTipoReporte(r.getTipoReporte());
+            reporte.setActivo(r.getActivo());
+            reporte.setFechaeventoR(r.getFechaeventoR());
+            reporte.setHoraEventoR(r.getHoraEventoR());
+            rR.save(reporte);
+        } else {
+            throw new ResourceNotFoundException("No se encontró el reporte con el ID: " + id);
+        }
     }
 }

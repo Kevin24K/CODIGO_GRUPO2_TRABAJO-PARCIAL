@@ -1,8 +1,10 @@
 package pe.edu.upc.demosi.servicesimplements;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.demosi.entities.Coincidencia;
+import pe.edu.upc.demosi.entities.EstadoReporte;
 import pe.edu.upc.demosi.entities.Objeto;
 
+import pe.edu.upc.demosi.entities.Rol;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.repositories.IObjetoRepository;
 import pe.edu.upc.demosi.servicesinterfaces.IObjetoService;
@@ -54,12 +56,8 @@ public class ObjetoServicesImplement implements IObjetoService {
     }
 
     @Override
-    public void delete(long id) {
-        Objeto objeto = listId(id).orElse(null);
-        if (objeto == null) {
-            throw new ResourceNotFoundException("No se encontró el objeto con el ID: " + id);
-        }
-        oR.delete(objeto);
+    public void delete(Long id) {
+        oR.deleteById(id);
     }
 
     @Override
@@ -70,6 +68,20 @@ public class ObjetoServicesImplement implements IObjetoService {
     @Override
     public List<Objeto> listarPorCategoria(long idCategoria) {
         return oR.findByCategoria_IdCategoria(idCategoria);
+    }
+
+    @Override
+    public void update(Long id, Objeto o) {
+        Objeto objeto = listId(id).orElse(null);
+        if (objeto != null) {
+            objeto.setNombreObjeto(o.getNombreObjeto());
+            objeto.setDescripcionObjeto(o.getDescripcionObjeto());
+            objeto.setColorObjeto(o.getColorObjeto());
+            objeto.setMarcaObjeto(o.getMarcaObjeto());
+            oR.save(objeto);
+        } else {
+            throw new ResourceNotFoundException("No se encontró el objeto con el ID: " + id);
+        }
     }
 
 }

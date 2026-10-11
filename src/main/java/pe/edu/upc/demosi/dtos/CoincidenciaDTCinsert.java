@@ -7,8 +7,6 @@ import java.time.LocalDateTime;
 
 public class CoincidenciaDTCinsert {
 
-    private Long idCoincidencia;
-
     @NotNull(message = "El ID del reporte perdido es obligatorio")
     private Long idReportePerdido;
 
@@ -26,14 +24,6 @@ public class CoincidenciaDTCinsert {
 
     @NotNull(message = "La fecha de generación es obligatoria")
     private LocalDateTime fechaGeneracionC;
-
-    public Long getIdCoincidencia() {
-        return idCoincidencia;
-    }
-
-    public void setIdCoincidencia(Long idCoincidencia) {
-        this.idCoincidencia = idCoincidencia;
-    }
 
     public Long getIdReportePerdido() {
         return idReportePerdido;

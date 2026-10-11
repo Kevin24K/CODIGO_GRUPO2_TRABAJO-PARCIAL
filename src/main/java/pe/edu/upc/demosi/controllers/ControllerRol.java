@@ -4,9 +4,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pe.edu.upc.demosi.dtos.RolDTCinsert;
-import pe.edu.upc.demosi.dtos.RolDTCList;
+import pe.edu.upc.demosi.dtos.*;
+import pe.edu.upc.demosi.entities.Categoria;
+import pe.edu.upc.demosi.entities.Coincidencia;
+import pe.edu.upc.demosi.entities.EstadoCoincidencia;
 import pe.edu.upc.demosi.entities.Rol;
+import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.servicesinterfaces.IRolService;
 
 import java.net.URI;
@@ -57,7 +60,25 @@ public class ControllerRol {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        rS.delete(id);
+        Rol rol = rS.listId(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "No existe un rol con el id: " + id
+                        )
+                );
+        rS.delete(rol.getIdRol());
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<RolDTODetail> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody RolDTOUpdate dto) {
+        Rol rol = modelMapper.map(dto, Rol.class);
+
+        rS.update(id, rol);
+
+        RolDTODetail responseDTO = modelMapper.map(rS.listId(id), RolDTODetail.class);
+
+        return ResponseEntity.ok(responseDTO);
     }
 }

@@ -9,8 +9,6 @@ import java.time.LocalTime;
 
 public class ReporteDTCinsert {
 
-    private Long idReporte;
-
     @NotBlank(message = "El tipo de reporte no puede ser nulo ni estar vacío")
     private String tipoReporte;
 
@@ -34,14 +32,6 @@ public class ReporteDTCinsert {
 
     @NotNull(message = "El Id del Estado del Reporte es obligatorio.")
     private Long idEstadoReporte;
-
-    public Long getIdReporte() {
-        return idReporte;
-    }
-
-    public void setIdReporte(Long idReporte) {
-        this.idReporte = idReporte;
-    }
 
     public String getTipoReporte() {
         return tipoReporte;

@@ -7,8 +7,6 @@ import java.time.LocalDateTime;
 
 public class NotificacionDTCinsert {
 
-    private Long idNotificacion;
-
     @NotBlank(message = "El id de la coincidencia no puede ser nulo ni estar vacío")
     private String tituloNotificacion;
 
@@ -29,14 +27,6 @@ public class NotificacionDTCinsert {
 
     @NotNull(message = "El Id de coincidencia es obligatorio.")
     private Long idCoincidencia;
-
-    public Long getIdNotificacion() {
-        return idNotificacion;
-    }
-
-    public void setIdNotificacion(Long idNotificacion) {
-        this.idNotificacion = idNotificacion;
-    }
 
     public String getTituloNotificacion() {
         return tituloNotificacion;

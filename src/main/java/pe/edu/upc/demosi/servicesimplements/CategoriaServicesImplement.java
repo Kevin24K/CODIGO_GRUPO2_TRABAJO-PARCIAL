@@ -27,12 +27,8 @@ public class CategoriaServicesImplement implements ICategoriaService {
     }
 
     @Override
-    public void delete(long id) {
-        Categoria categoria = listId(id).orElse(null);
-        if (categoria == null) {
-            throw new ResourceNotFoundException("No se encontró la categoría con el ID: " + id);
-        }
-        cR.delete(categoria);
+    public void delete(Long id) {
+        cR.deleteById(id);
     }
     @Override
     public void update(Long id, Categoria c) {
@@ -51,5 +47,4 @@ public class CategoriaServicesImplement implements ICategoriaService {
     public Optional<Categoria> listId(Long id) {
         return cR.findById(id);
     }
-
 }

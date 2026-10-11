@@ -81,11 +81,21 @@ public class UsuarioServicesImplement implements IUsuarioService, UserDetailsSer
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + correo));
     }
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
+        uR.deleteById(id);
+    }
+
+    @Override
+    public void update(Long id, Usuario c) {
         Usuario usuario = listId(id).orElse(null);
-        if (usuario == null) {
+        if (usuario != null) {
+            usuario.setNombre(c.getNombre());
+            usuario.setApellido(c.getApellido());
+            usuario.setCorreo(c.getCorreo());
+            usuario.setFechaRegistro(c.getFechaRegistro());
+            uR.save(usuario);
+        } else {
             throw new ResourceNotFoundException("No se encontró el usuario con el ID: " + id);
         }
-        uR.delete(usuario);
     }
 }

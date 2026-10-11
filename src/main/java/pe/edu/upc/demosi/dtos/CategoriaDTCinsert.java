@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotNull;
 
 public class CategoriaDTCinsert {
 
-    private Long idCategoria;
-
     @NotBlank(message = "El nombre de la categoría no puede ser nulo ni estar vacío")
     private String nombreCategoria;
 
@@ -15,15 +13,6 @@ public class CategoriaDTCinsert {
 
     @NotNull(message = "El estado de la categoría es obligatorio")
     private Boolean activoCategoria;
-
-    public Long getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Long idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
     public String getNombreCategoria() {
         return nombreCategoria;
     }

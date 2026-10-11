@@ -10,6 +10,7 @@ import pe.edu.upc.demosi.dtos.CategoriaDTCinsert;
 import pe.edu.upc.demosi.dtos.CategoriaDTODetail;
 import pe.edu.upc.demosi.dtos.CategoriaDTOUpdate;
 import pe.edu.upc.demosi.entities.Categoria;
+import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.servicesinterfaces.ICategoriaService;
 
 import java.net.URI;
@@ -61,9 +62,13 @@ public class ControllerCategoria {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-
-        cS.delete(id);
-
+        Categoria categoria = cS.listId(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "No existe una categoría con el id: " + id
+                        )
+                );
+        cS.delete(categoria.getIdCategoria());
         return ResponseEntity.noContent().build();
     }
     @PutMapping("/{id}")

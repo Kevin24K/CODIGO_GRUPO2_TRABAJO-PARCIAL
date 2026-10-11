@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class ObjetoDTCinsert {
-    private Long idObjeto;
 
     @NotBlank(message = "El nombre del objeto no puede ser nulo ni estar vacío")
     private String nombreObjeto;
@@ -23,14 +22,6 @@ public class ObjetoDTCinsert {
 
     @NotNull(message = "El Id de la Categoría es obligatorio.")
     private Long idCategoria;
-
-    public Long getIdObjeto() {
-        return idObjeto;
-    }
-
-    public void setIdObjeto(Long idObjeto) {
-        this.idObjeto = idObjeto;
-    }
 
     public String getNombreObjeto() {
         return nombreObjeto;

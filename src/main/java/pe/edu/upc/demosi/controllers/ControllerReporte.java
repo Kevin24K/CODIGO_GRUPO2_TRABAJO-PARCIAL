@@ -5,12 +5,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pe.edu.upc.demosi.dtos.ReporteDTCList;
-import pe.edu.upc.demosi.dtos.ReporteDTCinsert;
-import pe.edu.upc.demosi.entities.EstadoReporte;
-import pe.edu.upc.demosi.entities.Objeto;
-import pe.edu.upc.demosi.entities.Reporte;
-import pe.edu.upc.demosi.entities.Usuario;
+import pe.edu.upc.demosi.dtos.*;
+import pe.edu.upc.demosi.entities.*;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.servicesinterfaces.IEstadoReporteService;
 import pe.edu.upc.demosi.servicesinterfaces.IObjetoService;
@@ -98,7 +94,25 @@ public class ControllerReporte {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        rS.delete(id);
+        Reporte reporte = rS.listId(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "No existe un reporte con el id: " + id
+                        )
+                );
+        rS.delete(reporte.getIdReporte());
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<ReporteDTODetail> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody ReporteDTOUpdate dto) {
+        Reporte reporte = modelMapper.map(dto, Reporte.class);
+
+        rS.update(id, reporte);
+
+        ReporteDTODetail responseDTO = modelMapper.map(rS.listId(id), ReporteDTODetail.class);
+
+        return ResponseEntity.ok(responseDTO);
     }
 }

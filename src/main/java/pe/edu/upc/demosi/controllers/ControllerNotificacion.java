@@ -4,11 +4,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pe.edu.upc.demosi.dtos.NotificacionDTCinsert;
-import pe.edu.upc.demosi.dtos.NotificacionDTCList;
-import pe.edu.upc.demosi.entities.Coincidencia;
-import pe.edu.upc.demosi.entities.Notificacion;
-import pe.edu.upc.demosi.entities.Usuario;
+import pe.edu.upc.demosi.dtos.*;
+import pe.edu.upc.demosi.entities.*;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.servicesinterfaces.ICoincidenciaService;
 import pe.edu.upc.demosi.servicesinterfaces.INotificacionService;
@@ -80,8 +77,25 @@ public class ControllerNotificacion {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        // Llama al método delete del servicio (nS)
-        nS.delete(id);
+        Notificacion notificacion = nS.listId(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "No existe una notificación con el id: " + id
+                        )
+                );
+        nS.delete(notificacion.getIdNotificacion());
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<NotificacionDTODetail> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody NotificacionDTOUpdate dto) {
+        Notificacion notificacion = modelMapper.map(dto, Notificacion.class);
+
+        nS.update(id, notificacion);
+
+        NotificacionDTODetail responseDTO = modelMapper.map(nS.listId(id), NotificacionDTODetail.class);
+
+        return ResponseEntity.ok(responseDTO);
     }
 }

@@ -5,8 +5,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pe.edu.upc.demosi.dtos.EstadoCoincidenciaDTOinsert;
+import pe.edu.upc.demosi.dtos.*;
+import pe.edu.upc.demosi.entities.Coincidencia;
 import pe.edu.upc.demosi.entities.EstadoCoincidencia;
+import pe.edu.upc.demosi.entities.EstadoReporte;
+import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.servicesinterfaces.IEstadoCoincidenciaService;
 
 import java.net.URI;
@@ -59,5 +62,28 @@ public class ControllerEstadoCoincidencia {
     public ResponseEntity<List<EstadoCoincidencia>> listarPendientes() {
         List<EstadoCoincidencia> lista = eR.listPendientes(); // eR es tu IEstadoCoincidenciaRepository
         return ResponseEntity.ok(lista); // CA02: HTTP 200 OK
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        EstadoCoincidencia estadocoincidencia = eR.listId(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "No existe un estado de coincidencia con el id: " + id
+                        )
+                );
+        eR.delete(estadocoincidencia.getIdEstadoCoincidencia());
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<EstadoCoincidenciaDTODetail> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody EstadoCoincidenciaDTOUpdate dto) {
+        EstadoCoincidencia estadocoincidencia = modelMapper.map(dto, EstadoCoincidencia.class);
+
+        eR.update(id, estadocoincidencia);
+
+        EstadoCoincidenciaDTODetail responseDTO = modelMapper.map(eR.listId(id), EstadoCoincidenciaDTODetail.class);
+
+        return ResponseEntity.ok(responseDTO);
     }
 }

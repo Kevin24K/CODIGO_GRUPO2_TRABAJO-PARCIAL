@@ -5,8 +5,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pe.edu.upc.demosi.dtos.CoincidenciaDTCList;
-import pe.edu.upc.demosi.dtos.CoincidenciaDTCinsert;
+import pe.edu.upc.demosi.dtos.*;
+import pe.edu.upc.demosi.entities.Categoria;
 import pe.edu.upc.demosi.entities.Coincidencia;
 import pe.edu.upc.demosi.entities.EstadoCoincidencia;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
@@ -23,9 +23,9 @@ public class ControllerCoincidencia {
     private final IEstadoCoincidenciaService eR;
     private final ModelMapper modelMapper;
 
-    public ControllerCoincidencia(ICoincidenciaService cR, ModelMapper modelMapper,IEstadoCoincidenciaService eR) {
+    public ControllerCoincidencia(ICoincidenciaService cR, ModelMapper modelMapper, IEstadoCoincidenciaService eR) {
         this.cR = cR;
-        this.eR=eR;
+        this.eR = eR;
         this.modelMapper = modelMapper;
     }
 
@@ -70,10 +70,28 @@ public class ControllerCoincidencia {
                 .created(location)
                 .body(responseDTO);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        // Llama al método delete del servicio (cS)
-        cR.delete(id);
+        Coincidencia coincidencia = cR.listId(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "No existe una coincidencia con el id: " + id
+                        )
+                );
+        cR.delete(coincidencia.getIdCoincidencia());
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<CoincidenciaDTODetail> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody CoincidenciaDTOUpdate dto) {
+        Coincidencia coincidencia = modelMapper.map(dto, Coincidencia.class);
+
+        cR.update(id, coincidencia);
+
+        CoincidenciaDTODetail responseDTO = modelMapper.map(cR.listId(id), CoincidenciaDTODetail.class);
+
+        return ResponseEntity.ok(responseDTO);
     }
 }

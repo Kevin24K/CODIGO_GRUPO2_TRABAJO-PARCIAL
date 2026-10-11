@@ -1,5 +1,6 @@
 package pe.edu.upc.demosi.servicesinterfaces;
 
+import pe.edu.upc.demosi.entities.Categoria;
 import pe.edu.upc.demosi.entities.Objeto;
 import pe.edu.upc.demosi.dtos.ObjetoCategoriaDTCList;
 
@@ -9,7 +10,8 @@ import java.util.Optional;
 public interface IObjetoService {
     void insert(Objeto objeto);
     List<Objeto> list();
-    void delete(long id);
+    void update(Long id, Objeto o);
+    void delete(Long id);
     List<Objeto> listarPorCategoria(long idCategoria);
     public Optional<Objeto> listId(Long id);
     List<Objeto> listarActivos();

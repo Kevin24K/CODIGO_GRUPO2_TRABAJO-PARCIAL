@@ -5,10 +5,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pe.edu.upc.demosi.dtos.*;
+import pe.edu.upc.demosi.entities.Coincidencia;
+import pe.edu.upc.demosi.entities.EstadoCoincidencia;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
-import pe.edu.upc.demosi.dtos.ObjetoDTCinsert;
-import pe.edu.upc.demosi.dtos.ObjetoDTCList;
-import pe.edu.upc.demosi.dtos.ObjetoCategoriaDTCList;
 import pe.edu.upc.demosi.entities.Categoria;
 import pe.edu.upc.demosi.entities.Objeto;
 import pe.edu.upc.demosi.servicesinterfaces.ICategoriaService;
@@ -90,8 +90,25 @@ public class ControllerObjeto {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        // Llama al método delete del servicio (oS)
-        oS.delete(id);
+        Objeto objeto = oS.listId(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "No existe un objeto con el id: " + id
+                        )
+                );
+        oS.delete(objeto.getIdObjeto());
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<ObjetoDTODetail> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody ObjetoDTOUpdate dto) {
+        Objeto objeto = modelMapper.map(dto, Objeto.class);
+
+        oS.update(id, objeto);
+
+        ObjetoDTODetail responseDTO = modelMapper.map(oS.listId(id), ObjetoDTODetail.class);
+
+        return ResponseEntity.ok(responseDTO);
     }
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface ICategoriaService {
     void insert(Categoria categoria);
     List<Categoria> list();
-    void delete(long id);
+    void delete(Long id);
     Optional<Categoria> listId(Long id);
     void update(Long id, Categoria c);
 }

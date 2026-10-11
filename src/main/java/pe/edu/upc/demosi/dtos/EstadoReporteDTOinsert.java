@@ -4,21 +4,11 @@ import jakarta.validation.constraints.NotBlank;
 
 public class EstadoReporteDTOinsert {
 
-    private Long idEstadoReporte;
-
     @NotBlank(message = "El nombre del estado es obligatorio")
     private String nombreEReporte;
 
     @NotBlank(message = "La descripción del estado es obligatoria")
     private String descripcionEReporte;
-
-    public Long getIdEstadoReporte() {
-        return idEstadoReporte;
-    }
-
-    public void setIdEstadoReporte(Long idEstadoReporte) {
-        this.idEstadoReporte = idEstadoReporte;
-    }
 
     public String getNombreEReporte() {
         return nombreEReporte;

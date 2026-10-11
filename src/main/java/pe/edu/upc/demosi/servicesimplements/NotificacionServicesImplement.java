@@ -1,7 +1,9 @@
 package pe.edu.upc.demosi.servicesimplements;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.demosi.entities.Coincidencia;
+import pe.edu.upc.demosi.entities.EstadoReporte;
 import pe.edu.upc.demosi.entities.Notificacion;
+import pe.edu.upc.demosi.entities.Rol;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.repositories.INotificacionRepository;
 import pe.edu.upc.demosi.servicesinterfaces.INotificacionService;
@@ -34,12 +36,22 @@ public class NotificacionServicesImplement implements INotificacionService {
     }
 
     @Override
-    public void delete(long id) {
-        Notificacion notificacion = listId(id).orElse(null);
-        if (notificacion == null) {
+    public void delete(Long id) {
+        nR.deleteById(id);
+    }
+
+    @Override
+    public void update(Long id, Notificacion n) {
+        Notificacion notif = listId(id).orElse(null);
+        if (notif != null) {
+            notif.setTipoNotificacion(n.getTipoNotificacion());
+            notif.setMensajeNotificacion(n.getMensajeNotificacion());
+            notif.setTituloNotificacion(n.getTituloNotificacion());
+            notif.setFechaCreacionN(n.getFechaCreacionN());
+            nR.save(notif);
+        } else {
             throw new ResourceNotFoundException("No se encontró la notificación con el ID: " + id);
         }
-        nR.delete(notificacion);
     }
 
     @Override

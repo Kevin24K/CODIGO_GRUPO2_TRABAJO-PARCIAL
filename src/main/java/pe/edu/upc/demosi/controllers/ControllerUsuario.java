@@ -6,11 +6,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pe.edu.upc.demosi.dtos.UsuarioDTCList;
-import pe.edu.upc.demosi.dtos.UsuarioDTCinsert;
-import pe.edu.upc.demosi.dtos.UsuarioActivoDTCList;
-import pe.edu.upc.demosi.entities.Rol;
-import pe.edu.upc.demosi.entities.Usuario;
+import org.modelmapper.ModelMapper;
+import pe.edu.upc.demosi.dtos.*;
+import pe.edu.upc.demosi.entities.*;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.servicesinterfaces.IRolService;
 import pe.edu.upc.demosi.servicesinterfaces.IUsuarioService;
@@ -26,11 +24,13 @@ public class ControllerUsuario {
     private final IUsuarioService uS;
     private final IRolService rS;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
 
-    public ControllerUsuario(IUsuarioService uS, IRolService rS, PasswordEncoder passwordEncoder) {
+    public ControllerUsuario(IUsuarioService uS, IRolService rS,ModelMapper modelMapper ,PasswordEncoder passwordEncoder) {
         this.uS = uS;
         this.rS = rS;
         this.passwordEncoder = passwordEncoder;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
@@ -111,8 +111,25 @@ public class ControllerUsuario {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        // Llama al método delete del servicio (uS)
-        uS.delete(id);
+        Usuario usuario = uS.listId(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "No existe un usuario con el id: " + id
+                        )
+                );
+        uS.delete(usuario.getIdUsuario());
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<UsuarioDTODetail> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody UsuarioDTOUpdate dto) {
+        Usuario usuario = modelMapper.map(dto, Usuario.class);
+
+        uS.update(id, usuario);
+
+        UsuarioDTODetail responseDTO = modelMapper.map(uS.listId(id), UsuarioDTODetail.class);
+
+        return ResponseEntity.ok(responseDTO);
     }
 }

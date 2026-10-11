@@ -1,5 +1,6 @@
 package pe.edu.upc.demosi.servicesinterfaces;
 
+import pe.edu.upc.demosi.entities.Categoria;
 import pe.edu.upc.demosi.entities.Usuario;
 import pe.edu.upc.demosi.dtos.UsuarioDTCList;
 
@@ -12,5 +13,6 @@ public interface IUsuarioService {
     Optional<Usuario> listId(Long id);
     List<Usuario> listarActivos();
     List<UsuarioDTCList> listarActivosConRol();
-    void delete(long id);
+    void delete(Long id);
+    void update(Long id, Usuario u);
 }
